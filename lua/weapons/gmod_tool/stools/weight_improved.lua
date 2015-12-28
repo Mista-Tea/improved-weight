@@ -522,7 +522,6 @@ function TOOL.BuildCPanel( cpanel )
 				[mode.."_tooltip_show"]   = "0",
 				[mode.."_tooltip_legacy"] = "0",
 				[mode.."_tooltip_scale"]  = "24",
-				[mode.."_hud"]            = "0",
 			},
 		},
 		CVars = { 
