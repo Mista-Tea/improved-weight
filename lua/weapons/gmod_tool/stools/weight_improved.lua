@@ -566,7 +566,7 @@ function TOOL.BuildCPanel( cpanel )
 		local wep = ply:GetActiveWeapon()
 		if ( not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or ply:GetInfo( "gmod_toolmode" ) ~= mode ) then return end
 		
-		timer.Simple( 0, function()
+		timer.Simple( 1, function()
 			RunConsoleCommand( "+menu" )
 			RunConsoleCommand( "gmod_toolmode", "" )
 			RunConsoleCommand( "gmod_toolmode", mode )
