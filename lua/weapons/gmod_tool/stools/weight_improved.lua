@@ -75,14 +75,15 @@ local weightLabels = {
 TOOL.Category = "Construction"
 TOOL.Name     = L(prefix.."name")
 
-TOOL.ClientConVar[ "mass" ]           = "1"
-TOOL.ClientConVar[ "tooltip_legacy" ] = "0"
-TOOL.ClientConVar[ "tooltip_scale" ]  = "24"
-TOOL.ClientConVar[ "colorscale" ]     = "1"
-TOOL.ClientConVar[ "rounded" ]        = "1"
-TOOL.ClientConVar[ "decimals" ]       = "2"
-TOOL.ClientConVar[ "notifs"]          = "1"
-TOOL.ClientConVar[ "notifs_sound" ]   = "1"
+TOOL.ClientConVar[ "mass" ]            = "1"
+TOOL.ClientConVar[ "tooltip_show" ]    = "0"
+TOOL.ClientConVar[ "tooltip_legacy" ]  = "0"
+TOOL.ClientConVar[ "tooltip_scale" ]   = "24"
+TOOL.ClientConVar[ "colorscale" ]      = "1"
+TOOL.ClientConVar[ "rounded" ]         = "1"
+TOOL.ClientConVar[ "decimals" ]        = "2"
+TOOL.ClientConVar[ "notifs"]           = "1"
+TOOL.ClientConVar[ "notifs_sound" ]    = "1"
 
 --[[--------------------------------------------------------------------------
 -- Convenience Functions
@@ -228,9 +229,11 @@ if ( CLIENT ) then
 	--]]--
 	local function DrawHUD()
 		local ply = LocalPlayer()
+		if ( not IsValid( ply ) ) then return end
+		
+		-- if they aren't forcing the tooltip to always show, check if they have the toolgun out and have weight selected
 		local wep = ply:GetActiveWeapon()
-
-		if ( not IsValid( ply ) or not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or ply:GetInfo( "gmod_toolmode" ) ~= mode ) then return end
+		if ( not tobool( ply:GetInfo( mode.."_tooltip_show" ) ) and (not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or ply:GetInfo( "gmod_toolmode" ) ~= mode) ) then return end
 		
 		local tr  = ply:GetEyeTrace()
 		local ent = tr.Entity
@@ -516,8 +519,10 @@ function TOOL.BuildCPanel( cpanel )
 				[mode.."_notifs"]         = "1",
 				[mode.."_notifs_sound"]   = "1",
 				[mode.."_rounded"]        = "1",
+				[mode.."_tooltip_show"]   = "0",
 				[mode.."_tooltip_legacy"] = "0",
 				[mode.."_tooltip_scale"]  = "24",
+				[mode.."_hud"]            = "0",
 			},
 		},
 		CVars = { 
@@ -527,8 +532,9 @@ function TOOL.BuildCPanel( cpanel )
 			mode.."_notifs",
 			mode.."_notifs_sound",
 			mode.."_rounded",
+			mode.."_tooltip_show",
 			mode.."_tooltip_legacy",
-			mode.."_tooltip_scale",			
+			mode.."_tooltip_scale",
 		}
 	}
 	
@@ -589,6 +595,8 @@ function TOOL.BuildCPanel( cpanel )
 	cpanel:ControlHelp( L(prefix.."help_decimals") .. "\n" )
 	cpanel:AddControl( "Slider",   { Label = L(prefix.."label_tooltip_scale"),     Command = mode.."_tooltip_scale", Type = "Numeric", Min = "1", Max = "128" } )
 	cpanel:ControlHelp( L(prefix.."help_tooltip_scale") .. "\n" )
+	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_show"),   Command = mode.."_tooltip_show" } )
+	cpanel:ControlHelp( L(prefix.."help_tooltip_show") )
 	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_legacy"), Command = mode.."_tooltip_legacy" } )
 	cpanel:ControlHelp( L(prefix.."help_tooltip_legacy") )
 	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs"),         Command = mode.."_notifs" } )
