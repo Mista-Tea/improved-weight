@@ -138,6 +138,7 @@ if ( SERVER ) then
 	--	Used by the Duplicator, AdvDupe, and AdvDupe2 tools.
 	--]]--
 	function SetMass( ply, ent, data )
+		if ( not IsValid( ent ) or not IsValid( ent:GetPhysicsObject() ) ) then return end
 		if ( not data.Mass ) then return end
 		if ( not IsSetup( ent ) ) then Setup( ent ) end
 		
