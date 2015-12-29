@@ -8,6 +8,7 @@ localify.Bind( "sv-se", prefix.."language_sv-se", "Svenska" )
 localify.Bind( "ja",    prefix.."language_ja",    "日本語" )
 localify.Bind( "nl",    prefix.."language_nl",    "Nederlandse" )
 localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
+localify.Bind( "de",    prefix.."language_de",    "Deutsche" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -320,6 +321,58 @@ localify.Bind( "pl", prefix.."hud_modified",             "Zmodyfikowany" )
 localify.Bind( "pl", prefix.."notif_applied",            "Zastosowano ciężar" )
 localify.Bind( "pl", prefix.."notif_copied",             "Skopiowano ciężar" )
 localify.Bind( "pl", prefix.."notif_restored",           "Przywrócono oryginalny ciężar" )
+
+--[[--------------------------------------------------------------------------
+-- German Localization
+-- Big thanks to Time SchocK (STEAM_0:1:12054113) for these translations!
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "de", prefix.."name",                     "Masse - Verbessert" )
+localify.Bind( "de", prefix.."desc",                     "Ändert die Masse eines Objekts" )
+localify.Bind( "de", prefix.."0",                        "Primär: Masse ändern  |  Sekundär: Masse kopieren |  Nachladen: Masse zurücksetzen" )
+-- Errors
+localify.Bind( "de", prefix.."error_zero_weight",        "Du musst eine Masse größer 0 wählen" )
+localify.Bind( "de", prefix.."error_invalid_phys",       "Dieses Objekt hat kein gültiges 'physics object' (Masse kann nicht geändert werden)" )
+localify.Bind( "de", prefix.."error_max_weight",         "Masse darf nicht größer als max sein" )
+-- Labels
+localify.Bind( "de", prefix.."label_colorscale",         "Farbenskalierung:" )
+localify.Bind( "de", prefix.."label_weight",             "Masse: " )
+localify.Bind( "de", prefix.."label_decimals",           "Dezimalstellen: " )
+localify.Bind( "de", prefix.."label_tooltip_scale",      "Tooltipskalierung: " )
+localify.Bind( "de", prefix.."label_language",           "Sprache: " )
+localify.Bind( "de", prefix.."label_credits",            "Deutsche Übersetzung von Time SchocK (STEAM_0:1:12054113)"
+-- Checkboxes
+localify.Bind( "de", prefix.."checkbox_round",           "Gerundete Masse im Tooltip anzeigen" )
+localify.Bind( "de", prefix.."checkbox_tooltip_show",    "Tooltip immer anzeigen" )
+localify.Bind( "de", prefix.."checkbox_tooltip_legacy",  "Legacy Tooltip benutzen" )
+localify.Bind( "de", prefix.."checkbox_notifs",          "Benachrichtigungen anzeigen" )
+localify.Bind( "de", prefix.."checkbox_notifs_sound",    "Benachrichtigungssounds" )
+-- Comboboxes
+localify.Bind( "de", prefix.."combobox_green_to_red",    "Grün nach Rot" )
+localify.Bind( "de", prefix.."combobox_green_to_yellow", "Grün nach Gelb" )
+localify.Bind( "de", prefix.."combobox_green_to_blue",   "Grün nach Blau" )
+localify.Bind( "de", prefix.."combobox_blue_to_red",     "Blau nach Rot" )
+localify.Bind( "de", prefix.."combobox_none",            "Keine" )
+
+localify.Bind( "de", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "de", prefix.."combobox_maximum",         "Maximum" )
+localify.Bind( "de", prefix.."combobox_default",         "Standard" )
+-- Descriptions
+localify.Bind( "de", prefix.."help_colorscale",          "Zeigt einen Lichtschein um das gewählte Objekt. Die Farbe des Scheins entspricht der Masse des Objekts. Je schwerer die Masse desto stärker die zweite Farbe und umgekehrt." )
+localify.Bind( "de", prefix.."help_decimals",            "Bestimmt auf wie viele Dezimalstellen die Masse im HUD gerundet wird. Bei NULL werden nur ganze Zahlen dargestellt." )
+localify.Bind( "de", prefix.."help_tooltip_show",        "Zeigt den Tooltip auch wenn das Tool nicht benutzt wird." )
+localify.Bind( "de", prefix.."help_tooltip_scale",       "Bestimmt die Größe des Tooltips" )
+localify.Bind( "de", prefix.."help_tooltip_legacy",      "Zeigt einen leicht veränderten Tooltip, der in älteren Versionen von Garry's Mod benutzt wurde" )
+localify.Bind( "de", prefix.."help_notifs",              "Zeigt hilfreiche Benachrichtigungen beim Ändern, Kopieren und Zurücksetzen der Masse eines Objekts" )
+localify.Bind( "de", prefix.."help_notifs_sound",        "Spielt einen Ton, wenn das Gewicht geändert wird" )
+-- HUD Text
+localify.Bind( "de", prefix.."hud_original",             "Original" )
+localify.Bind( "de", prefix.."hud_modified",             "Geändert" )
+-- Notifications
+localify.Bind( "de", prefix.."notif_applied",            "Masse verändert" )
+localify.Bind( "de", prefix.."notif_copied",             "Masse kopiert" )
+localify.Bind( "de", prefix.."notif_restored",           "Masse zurückgesetzt" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
