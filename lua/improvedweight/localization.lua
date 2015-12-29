@@ -392,6 +392,7 @@ localify.Bind( "", prefix.."label_weight",             "" )
 localify.Bind( "", prefix.."label_decimals",           "" )
 localify.Bind( "", prefix.."label_tooltip_scale",      "" )
 localify.Bind( "", prefix.."label_language",           "" )
+localify.Bind( "", prefix.."label_credits",            "" )
 -- Checkboxes
 localify.Bind( "", prefix.."checkbox_round",           "" )
 localify.Bind( "", prefix.."checkbox_tooltip_show",    "" )
