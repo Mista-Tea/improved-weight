@@ -8,7 +8,7 @@ localify.Bind( "sv-se", prefix.."language_sv-se", "Svenska" )
 localify.Bind( "ja",    prefix.."language_ja",    "日本語" )
 localify.Bind( "nl",    prefix.."language_nl",    "Nederlandse" )
 localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
-localify.Bind( "de",    prefix.."language_de",    "Deutsche" )
+localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
