@@ -179,7 +179,7 @@ localify.Bind( "ja", prefix.."error_zero_weight",        "適用される重量�
 localify.Bind( "ja", prefix.."error_invalid_phys",       "このエンティティには有効な物理オブジェクトが存在しません（重量は変更できません）" )
 localify.Bind( "ja", prefix.."error_max_weight",         "重量は最高値を超えられません" )
 -- Labels
-localify.Bind( "ja", prefix.."label_colorscale",         "カラースケール" )
+localify.Bind( "ja", prefix.."label_colorscale",         "カラースケール: " )
 localify.Bind( "ja", prefix.."label_weight",             "重量: " )
 localify.Bind( "ja", prefix.."label_decimals",           "小数点: " )
 localify.Bind( "ja", prefix.."label_tooltip_scale",      "ツールチップの大きさ: " )
@@ -283,7 +283,7 @@ localify.Bind( "pl", prefix.."error_zero_weight",        "Ciężar musi być wi�
 localify.Bind( "pl", prefix.."error_invalid_phys",       "Ten obiekt nie posiada modelu fizycznego (nie można zmodyfikować  ciężaru)" )
 localify.Bind( "pl", prefix.."error_max_weight",         "Ciężar nie może przekraczać maximum" )
 -- Labels
-localify.Bind( "pl", prefix.."label_colorscale",         "Skala Koloru:" )
+localify.Bind( "pl", prefix.."label_colorscale",         "Skala Koloru: " )
 localify.Bind( "pl", prefix.."label_weight",             "Ciężar: " )
 localify.Bind( "pl", prefix.."label_decimals",           "Miejsca Po Przecinku: " )
 localify.Bind( "pl", prefix.."label_tooltip_scale",      "Skala Podpowiedzi: " )
