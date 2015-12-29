@@ -341,7 +341,7 @@ localify.Bind( "de", prefix.."label_weight",             "Masse: " )
 localify.Bind( "de", prefix.."label_decimals",           "Dezimalstellen: " )
 localify.Bind( "de", prefix.."label_tooltip_scale",      "Tooltipskalierung: " )
 localify.Bind( "de", prefix.."label_language",           "Sprache: " )
-localify.Bind( "de", prefix.."label_credits",            "Deutsche Übersetzung von Time SchocK (STEAM_0:1:12054113)"
+localify.Bind( "de", prefix.."label_credits",            "Deutsche Übersetzung von Time SchocK (STEAM_0:1:12054113)" )
 -- Checkboxes
 localify.Bind( "de", prefix.."checkbox_round",           "Gerundete Masse im Tooltip anzeigen" )
 localify.Bind( "de", prefix.."checkbox_tooltip_show",    "Tooltip immer anzeigen" )
