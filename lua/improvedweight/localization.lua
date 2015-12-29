@@ -15,7 +15,7 @@ localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
 
 -- Tool Settings
 localify.Bind( "en", prefix.."name",                     "Weight - Improved" )
-localify.Bind( "en", prefix.."desc",                     "Modifies the weight of an entity. Left click to apply, right click to copy, and reload to restore the original weight." )
+localify.Bind( "en", prefix.."desc",                     "Modifies the weight of an entity" )
 localify.Bind( "en", prefix.."0",                        "Primary: Apply Weight  |  Secondary: Copy Weight |  Reload: Reset Weight" )
 -- Errors
 localify.Bind( "en", prefix.."error_zero_weight",        "You must apply a weight greater than 0" )
