@@ -554,7 +554,8 @@ function TOOL.BuildCPanel( cpanel )
 	local languageOptions = {}
 	
 	for code, tbl in pairs( localify.GetLocalizations() ) do
-		if ( table.Count( tbl ) == 0 ) then continue end
+		if ( not L(prefix.."language_"..code, code) ) then continue end
+		
 		languageOptions[ L(prefix.."language_"..code, code) ] = { localify_language = code }
 	end
 	
