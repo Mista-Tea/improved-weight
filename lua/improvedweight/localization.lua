@@ -9,6 +9,7 @@ localify.Bind( "ja",    prefix.."language_ja",    "日本語" )
 localify.Bind( "nl",    prefix.."language_nl",    "Nederlandse" )
 localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
 localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
+localify.Bind( "es",    prefix.."language_es",    "Español" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -373,6 +374,58 @@ localify.Bind( "de", prefix.."hud_modified",             "Geändert" )
 localify.Bind( "de", prefix.."notif_applied",            "Masse verändert" )
 localify.Bind( "de", prefix.."notif_copied",             "Masse kopiert" )
 localify.Bind( "de", prefix.."notif_restored",           "Masse zurückgesetzt" )
+
+--[[--------------------------------------------------------------------------
+-- Spanish Localization
+-- Big thanks to IFerPe01 (STEAM_0:0:125631888) for these translations!
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "es", prefix.."name",                     "Peso - Mejorado" )
+localify.Bind( "es", prefix.."desc",                     "Modifica el peso de una entidad" )
+localify.Bind( "es", prefix.."0",                        "Primario: Aplicar Peso  |  Secundario: Copiar Peso |  Recargar: Resetear Peso" )
+-- Errors
+localify.Bind( "es", prefix.."error_zero_weight",        "Debes aplicar un peso mayor a 0" )
+localify.Bind( "es", prefix.."error_invalid_phys",       "Esta entidad no tiene físicas de objeto válidas (no se puede modificar el peso)" )
+localify.Bind( "es", prefix.."error_max_weight",         "El peso no puede exceder el máximoEl peso no puede exceder el máximo" )
+-- Labels
+localify.Bind( "es", prefix.."label_colorscale",         "Escala de Color: " )
+localify.Bind( "es", prefix.."label_weight",             "Peso: " )
+localify.Bind( "es", prefix.."label_decimals",           "Lugares Decimales: " )
+localify.Bind( "es", prefix.."label_tooltip_scale",      "Escala de la Información: " )
+localify.Bind( "es", prefix.."label_language",           "Lenguaje: " )
+localify.Bind( "es", prefix.."label_credits",            "Español traducción por IFerPe01 (STEAM_0:0:125631888)" )
+-- Checkboxes
+localify.Bind( "es", prefix.."checkbox_round",           "Mostrar pesos redondeados en la información" )
+localify.Bind( "es", prefix.."checkbox_tooltip_show",    "Siempre mostrar la información" )
+localify.Bind( "es", prefix.."checkbox_tooltip_legacy",  "Usar información legada" )
+localify.Bind( "es", prefix.."checkbox_notifs",          "Mostrar notificaciones" )
+localify.Bind( "es", prefix.."checkbox_notifs_sound",    "Reproducir sonidos de notificación" )
+-- Comboboxes
+localify.Bind( "es", prefix.."combobox_green_to_red",    "Verde a Rojo" )
+localify.Bind( "es", prefix.."combobox_green_to_yellow", "Verde a Amarillo" )
+localify.Bind( "es", prefix.."combobox_green_to_blue",   "Verde a Azul" )
+localify.Bind( "es", prefix.."combobox_blue_to_red",     "Azul a Rojo" )
+localify.Bind( "es", prefix.."combobox_none",            "Ninguno" )
+
+localify.Bind( "es", prefix.."combobox_minimum",         "Mínimo" )
+localify.Bind( "es", prefix.."combobox_maximum",         "Máximo" )
+localify.Bind( "es", prefix.."combobox_default",         "Predefinido" )
+-- Descriptions
+localify.Bind( "es", prefix.."help_colorscale",          "Añade un halo alrededor de la entidad con un color representando su peso actual. Los colores van de mínimo a máximo respectivamente." )
+localify.Bind( "es", prefix.."help_decimals",            "Determina cuántos con lugares decimales el peso debería estar rodeado cuando se muestra en el HUD. Cero significa que todos los números están mostrándose." )
+localify.Bind( "es", prefix.."help_tooltip_show",        "Muestra la información incluso cuando la herramienta de peso no está siendo usada." )
+localify.Bind( "es", prefix.."help_tooltip_scale",       "Define el tamaño de la información presente en el HUD." )
+localify.Bind( "es", prefix.."help_tooltip_legacy",      "Activa una versión levemente modificada de la información en las versiones anteriores de Garry's Mod." )
+localify.Bind( "es", prefix.."help_notifs",              "Activa notificaciones útiles cuando aplicas, copias o reseteas el peso de una entidad." )
+localify.Bind( "es", prefix.."help_notifs_sound",        "Activa un sonido que notifica cuando se aplica peso a una entidad." )
+-- HUD Text
+localify.Bind( "es", prefix.."hud_original",             "Original" )
+localify.Bind( "es", prefix.."hud_modified",             "Modificado" )
+-- Notifications
+localify.Bind( "es", prefix.."notif_applied",            "Peso aplicado" )
+localify.Bind( "es", prefix.."notif_copied",             "Peso copiado" )
+localify.Bind( "es", prefix.."notif_restored",           "Se restauró el peso original" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
