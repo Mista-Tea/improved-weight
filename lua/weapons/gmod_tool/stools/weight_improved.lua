@@ -1,17 +1,20 @@
 --[[--------------------------------------------------------------------------
-	Improved Weight
+	Improved Weight Tool
 	
 	File name:
 		weight_improved.lua
 		
-	Author:
-		Original              - UNKNOWN
-		Updated for GMod 13   - Marii ( STEAM_0:1:16015332 )
-		Cleaned and optimized - Mista Tea
+	Authors:
+		- Original            :: Spoco     (STEAM_0:1:289018) 
+		- Updated for GMod 13 :: Marii     (STEAM_0:1:16015332)
+		- Rewritten           :: Mista Tea (STEAM_0:0:27507323)
 		
 	Changelog:
-		- Added to GitHub     May 27th, 2015
-		- Added to Workshop   May 28th, 2015
+		- Dec 28th, 2015 :: Added to GitHub
+		- Dec 28th, 2015 :: Added to Workshop
+		- Dec 29th, 2015 :: Added German support
+		- Jan 1st,  2016 :: Added Spanish support
+		- Jan 8th,  2016 :: Language switching improvements
 ----------------------------------------------------------------------------]]
 
 local mode = TOOL.Mode -- defined by the name of this file (default should be weight_improved)
