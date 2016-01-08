@@ -505,7 +505,7 @@ end
 -- 	TOOL.BuildCPanel( panel )
 --
 --]]--
-function TOOL.BuildCPanel( cpanel )
+local function buildCPanel( cpanel )
 	-- quick presets for default settings
 	local presets = { 
 		Label      = "Presets",
@@ -565,21 +565,15 @@ function TOOL.BuildCPanel( cpanel )
 		Options    = languageOptions,
 	}
 	
-	-- listen for changes to the localify language and reload the menu to update the localizations
+	-- listen for changes to the localify language and reload the tool's menu to update the localizations
 	cvars.AddChangeCallback( "localify_language", function( name, old, new )
-		RunConsoleCommand( "spawnmenu_reload" )
-		local ply = LocalPlayer()
-		local wep = ply:GetActiveWeapon()
-		if ( not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or ply:GetInfo( "gmod_toolmode" ) ~= mode ) then return end
-		
-		timer.Simple( 1, function()
-			RunConsoleCommand( "+menu" )
-			RunConsoleCommand( "gmod_toolmode", "" )
-			RunConsoleCommand( "gmod_toolmode", mode )
-		end )
-		
 		weightLabels.original = L(prefix.."hud_original")
 		weightLabels.modified = L(prefix.."hud_modified")
+		
+		local cpanel = controlpanel.Get( mode )
+		if ( not IsValid( cpanel ) ) then return end
+		cpanel:ClearControls()
+		buildCPanel( cpanel )
 	end, "improvedweight" )
 	
 	cpanel:AddControl( "ComboBox", languages )
@@ -605,4 +599,8 @@ function TOOL.BuildCPanel( cpanel )
 	cpanel:ControlHelp( L(prefix.."help_notifs") )
 	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs_sound"),   Command = mode.."_notifs_sound" } )
 	cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
+end
+
+function TOOL.BuildCPanel( cpanel )
+	buildCPanel( cpanel )
 end
