@@ -582,6 +582,8 @@ function TOOL.BuildCPanel( cpanel )
 		weightLabels.modified = L(prefix.."hud_modified")
 	end, "improvedweight" )
 	
+	cpanel:AddControl( "ComboBox", languages )
+	cpanel:ControlHelp( "\n" .. L(prefix.."label_credits") )
 	cpanel:AddControl( "Label",    { Text = L(prefix.."desc") } )
 	cpanel:AddControl( "ComboBox", presets )
 	cpanel:ControlHelp( "" )
@@ -603,7 +605,4 @@ function TOOL.BuildCPanel( cpanel )
 	cpanel:ControlHelp( L(prefix.."help_notifs") )
 	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs_sound"),   Command = mode.."_notifs_sound" } )
 	cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
-	
-	cpanel:AddControl( "ComboBox", languages )
-	cpanel:ControlHelp( "\n" .. L(prefix.."label_credits") )
 end
