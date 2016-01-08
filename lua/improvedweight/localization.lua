@@ -69,7 +69,7 @@ localify.Bind( "en", prefix.."notif_restored",           "Restored original weig
 
 -- Tool Settings
 localify.Bind( "pt-br", prefix.."name",                     "Peso - Melhorado" )
-localify.Bind( "pt-br", prefix.."desc",                     "Modifica a massa de uma entidade. Botão esquerdo para aplicar, botão direito para copiar e R para restaurar o peso original." )
+localify.Bind( "pt-br", prefix.."desc",                     "Modifica a massa de uma entidade" )
 localify.Bind( "pt-br", prefix.."0",                        "Botão esquerdo: Aplicar massa  |  Botão direito: Copiar massa  |  R: Restaurar massa" )
 -- Errors
 localify.Bind( "pt-br", prefix.."error_zero_weight",        "Você deve aplicar um peso maior que 0" )
@@ -173,7 +173,7 @@ localify.Bind( "sv-se", prefix.."notif_restored",           "Återställ orginal
 
 -- Tool Settings
 localify.Bind( "ja", prefix.."name",                     "重量 - 改良版" )
-localify.Bind( "ja", prefix.."desc",                     "エンティティの重量を変更します。" )
+localify.Bind( "ja", prefix.."desc",                     "エンティティの重量を変更します" )
 localify.Bind( "ja", prefix.."0",                        "左クリック: 重量を適用する | 右クリック: 重量をコピーする | リロード: 重量をリセットする" )
 
 -- Errors
