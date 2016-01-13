@@ -1,12 +1,17 @@
 #Improved Weight
 
 ###Author:
-	Original              - UNKNOWN   (?)
-	Updated for GMod 13   - Marii     ( STEAM_0:1:16015332 )
-	Cleaned and improved  - Mista Tea ( STEAM_0:0:27507323 )
+	- Original            :: Spoco     (STEAM_0:1:289018) 
+	- Updated for GMod 13 :: Marii     (STEAM_0:1:16015332)
+	- Rewritten           :: Mista Tea (STEAM_0:0:27507323)
 	
 ###Changelog:
-	- Added to GitHub     December 28th, 2015
+	- Dec 28th, 2015 :: Added to GitHub
+	- Dec 28th, 2015 :: Added to Workshop
+	- Dec 29th, 2015 :: Added German support
+	- Jan 1st,  2016 :: Added Spanish support
+	- Jan 8th,  2016 :: Language switching improvements
+	- Jan 13th, 2016 :: Notification bug fix for DarkRP
 
 ###Fixes:
 	- Fixed unpooled net message error.
