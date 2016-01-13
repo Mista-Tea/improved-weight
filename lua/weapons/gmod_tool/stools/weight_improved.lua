@@ -56,9 +56,9 @@ local GetConVar = GetConVar
 local LocalPlayer = LocalPlayer
 local GetConVarNumber = GetConVarNumber
 
-local NOTIFY_ERROR   = NOTIFY_ERROR
-local NOTIFY_GENERIC = NOTIFY_GENERIC
-local NOTIFY_CLEANUP = NOTIFY_CLEANUP
+local NOTIFY_GENERIC = NOTIFY_GENERIC or 0
+local NOTIFY_ERROR   = NOTIFY_ERROR   or 1
+local NOTIFY_CLEANUP = NOTIFY_CLEANUP or 4
 
 local MIN_WEIGHT      = 0.01      -- the minimum mass that can be set on a physics object (do not change, entities with 0 mass change to 45,678 mass when physgunned)
 local MAX_WEIGHT      = 50000     -- the maximum mass that can be set on a physics object (do not change, this is hardcoded by GMod/Source)
