@@ -16,6 +16,7 @@
 		- Jan 1st,  2016 :: Added Spanish support
 		- Jan 8th,  2016 :: Language switching improvements
 		- Jan 13th, 2016 :: Notification bug fix for DarkRP
+		- Apr 17th, 2016 :: Added Danish support
 ----------------------------------------------------------------------------]]
 
 local mode = TOOL.Mode -- defined by the name of this file (default should be weight_improved)

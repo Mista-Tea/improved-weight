@@ -10,6 +10,7 @@ localify.Bind( "nl",    prefix.."language_nl",    "Nederlandse" )
 localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
 localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
 localify.Bind( "es",    prefix.."language_es",    "Español" )
+localify.Bind( "da",    prefix.."language_da",    "Dansk" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -442,6 +443,60 @@ localify.Bind( "es", prefix.."hud_modified",             "Modificado" )
 localify.Bind( "es", prefix.."notif_applied",            "Peso aplicado" )
 localify.Bind( "es", prefix.."notif_copied",             "Peso copiado" )
 localify.Bind( "es", prefix.."notif_restored",           "Se restauró el peso original" )
+
+--[[--------------------------------------------------------------------------
+-- Danish Localization
+-- Big thanks to The Outrageous Dane (STEAM_0:0:63184464) for these translations!
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "da", prefix.."name",                     "Vægt - Forbedret" )
+localify.Bind( "da", prefix.."desc",                     "Modificerer vægten på en enhed" )
+localify.Bind( "da", prefix.."left",                     "Påfør vægt" )
+localify.Bind( "da", prefix.."right",                    "Kopier vægt" )
+localify.Bind( "da", prefix.."reload",                   "Nulstil vægt" )
+-- Errors
+localify.Bind( "da", prefix.."error_zero_weight",        "Du skal påføre en vægt på mere end 0" )
+localify.Bind( "da", prefix.."error_invalid_phys",       "Denne enhed har ikke et fysisk objekt tildelt (kan ikke modificere vægten)" )
+localify.Bind( "da", prefix.."error_max_weight",         "Vægten kan ikke overstige max" )
+-- Labels
+localify.Bind( "da", prefix.."label_colorscale",         "Farve Skala: " )
+localify.Bind( "da", prefix.."label_weight",             "Vægt: " )
+localify.Bind( "da", prefix.."label_decimals",           "Antal Decimaler: " )
+localify.Bind( "da", prefix.."label_tooltip_scale",      "Tooltip Skala: " )
+localify.Bind( "da", prefix.."label_language",           "Sprog: " )
+localify.Bind( "da", prefix.."label_credits",            "Dansk oversættelse af The Outrageous Dane (STEAM_0:0:63184464)" )
+-- Checkboxes
+localify.Bind( "da", prefix.."checkbox_round",           "Vis afrundede vægte i tooltip" )
+localify.Bind( "da", prefix.."checkbox_tooltip_show",    "Vis altid tooltip" )
+localify.Bind( "da", prefix.."checkbox_tooltip_legacy",  "Brug ældre tooltip" )
+localify.Bind( "da", prefix.."checkbox_notifs",          "Vis notifikationer" )
+localify.Bind( "da", prefix.."checkbox_notifs_sound",    "Afspil notifikationslyde" )
+-- Comboboxes
+localify.Bind( "da", prefix.."combobox_green_to_red",    "Grøn til Rød" )
+localify.Bind( "da", prefix.."combobox_green_to_yellow", "Grøn til Gul" )
+localify.Bind( "da", prefix.."combobox_green_to_blue",   "Grøn til Blå" )
+localify.Bind( "da", prefix.."combobox_blue_to_red",     "Blå til Rød" )
+localify.Bind( "da", prefix.."combobox_none",            "Ingen" )
+
+localify.Bind( "da", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "da", prefix.."combobox_maximum",         "Maximum" )
+localify.Bind( "da", prefix.."combobox_default",         "Standard" )
+-- Descriptions
+localify.Bind( "da", prefix.."help_colorscale",          "Tilføjer en halo omkring den valgte enhed, med en farve der viser dens aktuelle vægt. Farverne går fra minimum til maximum respektivt." )
+localify.Bind( "da", prefix.."help_decimals",            "Bestemmer hvor mange decimaler vægtene vil blive afrundet til når de vises i HUD'en. Der vises hele tal hvis sat til 0." )
+localify.Bind( "da", prefix.."help_tooltip_show",        "Viser tooltip selv når vægt værktøjet ikke bliver brugt." )
+localify.Bind( "da", prefix.."help_tooltip_scale",       "Sætter størrelsen på tooltip når HUD tegnes." )
+localify.Bind( "da", prefix.."help_tooltip_legacy",      "Aktiverer et, en smule modificeret tooltip brugt i ældre versioner af Garry's Mod." )
+localify.Bind( "da", prefix.."help_notifs",              "Aktiverer hjælpsomme notifikationer når en enheds vægt påføres, kopieres eller nulstilles." )
+localify.Bind( "da", prefix.."help_notifs_sound",        "Aktiverer notifikations lyden når der påføres vægt til en enhed." )
+-- HUD Text
+localify.Bind( "da", prefix.."hud_original",             "Original" )
+localify.Bind( "da", prefix.."hud_modified",             "Modificeret" )
+-- Notifications
+localify.Bind( "da", prefix.."notif_applied",            "Vægt påført" )
+localify.Bind( "da", prefix.."notif_copied",             "Vægt kopieret" )
+localify.Bind( "da", prefix.."notif_restored",           "Original vægt gendannet" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization

@@ -12,6 +12,7 @@
 	- Jan 1st,  2016 :: Added Spanish support
 	- Jan 8th,  2016 :: Language switching improvements
 	- Jan 13th, 2016 :: Notification bug fix for DarkRP
+	- Apr 17th, 2016 :: Added Danish support
 
 ###Fixes:
 	- Fixed unpooled net message error.
@@ -35,3 +36,4 @@
 	- Supports Polish <pl> (credits: Sarian [STEAM_0:0:34104920])
 	- Supports German <de> (credits: Time SchocK [STEAM_0:1:12054113])
 	- Supports Spanish <es> (credits: IFerPe01 [STEAM_0:0:125631888])
+	- Supports Danish <da> (credits: The Outrageous Dane [STEAM_0:0:63184464])
