@@ -33,3 +33,5 @@
 	- Supports Japanese <ja> (credits: daigennki/seihai [STEAM_0:1:43031440])
 	- Supports Dutch <nl> (credits: Bunny [STEAM_0:1:34698490])
 	- Supports Polish <pl> (credits: Sarian [STEAM_0:0:34104920])
+	- Supports German <de> (credits: Time SchocK [STEAM_0:1:12054113])
+	- Supports Spanish <es> (credits: IFerPe01 [STEAM_0:0:125631888])

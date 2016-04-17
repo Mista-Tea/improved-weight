@@ -18,7 +18,9 @@ localify.Bind( "es",    prefix.."language_es",    "Español" )
 -- Tool Settings
 localify.Bind( "en", prefix.."name",                     "Weight - Improved" )
 localify.Bind( "en", prefix.."desc",                     "Modifies the weight of an entity" )
-localify.Bind( "en", prefix.."0",                        "Primary: Apply Weight  |  Secondary: Copy Weight |  Reload: Reset Weight" )
+localify.Bind( "en", prefix.."left",                     "Apply weight" )
+localify.Bind( "en", prefix.."right",                    "Copy weight" )
+localify.Bind( "en", prefix.."reload",                   "Reset weight" )
 -- Errors
 localify.Bind( "en", prefix.."error_zero_weight",        "You must apply a weight greater than 0" )
 localify.Bind( "en", prefix.."error_invalid_phys",       "This entity does not have a valid physics object (cannot modify weight)" )
@@ -70,7 +72,9 @@ localify.Bind( "en", prefix.."notif_restored",           "Restored original weig
 -- Tool Settings
 localify.Bind( "pt-br", prefix.."name",                     "Peso - Melhorado" )
 localify.Bind( "pt-br", prefix.."desc",                     "Modifica a massa de uma entidade" )
-localify.Bind( "pt-br", prefix.."0",                        "Botão esquerdo: Aplicar massa  |  Botão direito: Copiar massa  |  R: Restaurar massa" )
+localify.Bind( "pt-br", prefix.."left",                     "Aplicar massa" )
+localify.Bind( "pt-br", prefix.."right",                    "Copiar massa" )
+localify.Bind( "pt-br", prefix.."reload",                   "Restaurar massa" )
 -- Errors
 localify.Bind( "pt-br", prefix.."error_zero_weight",        "Você deve aplicar um peso maior que 0" )
 localify.Bind( "pt-br", prefix.."error_invalid_phys",       "Esta entidade não possui um objeto físico válido. (Não é possível modificar a massa)" )
@@ -122,7 +126,9 @@ localify.Bind( "pt-br", prefix.."notif_restored",           "Peso original resta
 -- Tool Settings
 localify.Bind( "sv-se", prefix.."name",                     "Viktverktyg - Förbättrad" )
 localify.Bind( "sv-se", prefix.."desc",                     "Modifierar vikten av en enhet" )
-localify.Bind( "sv-se", prefix.."0",                        "Primär: Applicera vikt  |  Sekundär: Kopiera vikt |  Omladda: Återställ vikt" )
+localify.Bind( "sv-se", prefix.."left",                     "Applicera vikt" )
+localify.Bind( "sv-se", prefix.."right",                    "Kopiera vikt" )
+localify.Bind( "sv-se", prefix.."reload",                   "Återställ vikt" )
 -- Errors
 localify.Bind( "sv-se", prefix.."error_zero_weight",        "Du måste applicera en vikt större än 0" )
 localify.Bind( "sv-se", prefix.."error_invalid_phys",       "Den här enheten har ej ett giltigt fysik objekt (Kan ej ändra vikt)" )
@@ -174,7 +180,9 @@ localify.Bind( "sv-se", prefix.."notif_restored",           "Återställ orginal
 -- Tool Settings
 localify.Bind( "ja", prefix.."name",                     "重量 - 改良版" )
 localify.Bind( "ja", prefix.."desc",                     "エンティティの重量を変更します" )
-localify.Bind( "ja", prefix.."0",                        "左クリック: 重量を適用する | 右クリック: 重量をコピーする | リロード: 重量をリセットする" )
+localify.Bind( "ja", prefix.."left",                     "重量を適用する" )
+localify.Bind( "ja", prefix.."right",                    "重量をコピーする " )
+localify.Bind( "ja", prefix.."reload",                   "重量をリセットする" )
 
 -- Errors
 localify.Bind( "ja", prefix.."error_zero_weight",        "適用される重量は0以上である必要があります" )
@@ -227,7 +235,9 @@ localify.Bind( "ja", prefix.."notif_restored",           "元の重量に戻さ�
 -- Tool Settings
 localify.Bind( "nl", prefix.."name",                     "Gewicht - Verbeterd" )
 localify.Bind( "nl", prefix.."desc",                     "Verandert het gewicht van een object" )
-localify.Bind( "nl", prefix.."0",                        "Primair: Pas gewicht toe  |  Secundair: Kopieer gewicht  |  R (reload): Reset gewicht" )
+localify.Bind( "nl", prefix.."left",                     "Pas gewicht toe" )
+localify.Bind( "nl", prefix.."right",                    "Kopieer gewicht" )
+localify.Bind( "nl", prefix.."reload",                   "Reset gewicht" )
 -- Errors
 localify.Bind( "nl", prefix.."error_zero_weight",        "Je moet een gewicht toepassen dat meer weegt dan 0" )
 localify.Bind( "nl", prefix.."error_invalid_phys",       "Je kan het gewicht van dit object niet veranderen" )
@@ -279,7 +289,9 @@ localify.Bind( "nl", prefix.."notif_restored",           "Originele gewicht teru
 -- Tool Settings
 localify.Bind( "pl", prefix.."name",                     "Ciężar - Ulepszony" )
 localify.Bind( "pl", prefix.."desc",                     "Zmienia ciężar obiektu" )
-localify.Bind( "pl", prefix.."0",                        "LPM: Zastosuj ciężar  |  PPM: Skopiuj ciężar |  R: Zresetuj ciężar" )
+localify.Bind( "pl", prefix.."left",                     "Zastosuj ciężar" )
+localify.Bind( "pl", prefix.."right",                    "Skopiuj ciężar" )
+localify.Bind( "pl", prefix.."reload",                   "Zresetuj ciężar" )
 -- Errors
 localify.Bind( "pl", prefix.."error_zero_weight",        "Ciężar musi być większy od 0" )
 localify.Bind( "pl", prefix.."error_invalid_phys",       "Ten obiekt nie posiada modelu fizycznego (nie można zmodyfikować  ciężaru)" )
@@ -331,7 +343,9 @@ localify.Bind( "pl", prefix.."notif_restored",           "Przywrócono oryginaln
 -- Tool Settings
 localify.Bind( "de", prefix.."name",                     "Masse - Verbessert" )
 localify.Bind( "de", prefix.."desc",                     "Ändert die Masse eines Objekts" )
-localify.Bind( "de", prefix.."0",                        "Primär: Masse ändern  |  Sekundär: Masse kopieren |  Nachladen: Masse zurücksetzen" )
+localify.Bind( "de", prefix.."left",                     "Masse ändern" )
+localify.Bind( "de", prefix.."right",                    "Masse kopieren" )
+localify.Bind( "de", prefix.."reload",                   "Masse zurücksetzen" )
 -- Errors
 localify.Bind( "de", prefix.."error_zero_weight",        "Du musst eine Masse größer 0 wählen" )
 localify.Bind( "de", prefix.."error_invalid_phys",       "Dieses Objekt hat kein gültiges 'physics object' (Masse kann nicht geändert werden)" )
@@ -383,7 +397,9 @@ localify.Bind( "de", prefix.."notif_restored",           "Masse zurückgesetzt" 
 -- Tool Settings
 localify.Bind( "es", prefix.."name",                     "Peso - Mejorado" )
 localify.Bind( "es", prefix.."desc",                     "Modifica el peso de una entidad" )
-localify.Bind( "es", prefix.."0",                        "Primario: Aplicar Peso  |  Secundario: Copiar Peso |  Recargar: Resetear Peso" )
+localify.Bind( "es", prefix.."left",                     "Aplicar peso" )
+localify.Bind( "es", prefix.."right",                    "Copiar peso" )
+localify.Bind( "es", prefix.."reload",                   "Resetear peso" )
 -- Errors
 localify.Bind( "es", prefix.."error_zero_weight",        "Debes aplicar un peso mayor a 0" )
 localify.Bind( "es", prefix.."error_invalid_phys",       "Esta entidad no tiene físicas de objeto válidas (no se puede modificar el peso)" )
@@ -434,7 +450,9 @@ localify.Bind( "es", prefix.."notif_restored",           "Se restauró el peso o
 -- Tool Settings
 localify.Bind( "", prefix.."name",                     "" )
 localify.Bind( "", prefix.."desc",                     "" )
-localify.Bind( "", prefix.."0",                        "" )
+localify.Bind( "", prefix.."left",                     "" )
+localify.Bind( "", prefix.."right",                    "" )
+localify.Bind( "", prefix.."reload",                   "" )
 -- Errors
 localify.Bind( "", prefix.."error_zero_weight",        "" )
 localify.Bind( "", prefix.."error_invalid_phys",       "" )

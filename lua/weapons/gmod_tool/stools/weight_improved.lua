@@ -15,6 +15,7 @@
 		- Dec 29th, 2015 :: Added German support
 		- Jan 1st,  2016 :: Added Spanish support
 		- Jan 8th,  2016 :: Language switching improvements
+		- Jan 13th, 2016 :: Notification bug fix for DarkRP
 ----------------------------------------------------------------------------]]
 
 local mode = TOOL.Mode -- defined by the name of this file (default should be weight_improved)
@@ -78,6 +79,12 @@ local weightLabels = {
 TOOL.Category = "Construction"
 TOOL.Name     = L(prefix.."name")
 
+TOOL.Information = {
+	"left",
+	"right",
+	"reload"
+}
+
 TOOL.ClientConVar[ "mass" ]            = "1"
 TOOL.ClientConVar[ "tooltip_show" ]    = "0"
 TOOL.ClientConVar[ "tooltip_legacy" ]  = "0"
@@ -103,9 +110,11 @@ if ( CLIENT ) then
 	-- Language Settings
 	--------------------------------------------------------------------------]]--
 	
-	language.Add( "tool."..mode..".name", L(prefix.."name") )
-	language.Add( "tool."..mode..".desc", L(prefix.."desc") )
-	language.Add( "tool."..mode..".0",    L(prefix.."0") )
+	language.Add( "tool."..mode..".name",   L(prefix.."name") )
+	language.Add( "tool."..mode..".desc",   L(prefix.."desc") )
+	language.Add( "tool."..mode..".left",   L(prefix.."left") )
+	language.Add( "tool."..mode..".right",  L(prefix.."right") )
+	language.Add( "tool."..mode..".reload", L(prefix.."reload") )
 	
 	--[[--------------------------------------------------------------------------
 	-- Net Messages
@@ -604,6 +613,4 @@ local function buildCPanel( cpanel )
 	cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
 end
 
-function TOOL.BuildCPanel( cpanel )
-	buildCPanel( cpanel )
-end
+TOOL.BuildCPanel = buildCPanel
