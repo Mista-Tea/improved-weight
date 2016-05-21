@@ -519,7 +519,7 @@ localify.Bind( "bg", prefix.."label_weight",             "Тегло: " )
 localify.Bind( "bg", prefix.."label_decimals",           "Десетични знаци: " )
 localify.Bind( "bg", prefix.."label_tooltip_scale",      "Размер на подсказката: " )
 localify.Bind( "bg", prefix.."label_language",           "Език: " )
-localify.Bind( "bg", prefix.."label_credits",            "" )
+localify.Bind( "bg", prefix.."label_credits",            "Преведено на Български от [BA][Sk$Bh]Trick or treat KID!" )
 -- Checkboxes
 localify.Bind( "bg", prefix.."checkbox_round",           "Изобразява закръглени тегла в подсказката" )
 localify.Bind( "bg", prefix.."checkbox_tooltip_show",    "Винаги показвай подсказка" )
