@@ -13,7 +13,7 @@
 	- Jan 8th,  2016 :: Language switching improvements
 	- Jan 13th, 2016 :: Notification bug fix for DarkRP
 	- Apr 17th, 2016 :: Added Danish support
-	- May 21st  2016 :: Added Bulgarian support
+	- May 21st, 2016 :: Added Bulgarian support
 
 ###Fixes:
 	- Fixed unpooled net message error.
@@ -38,4 +38,4 @@
 	- Supports German <de> (credits: Time SchocK [STEAM_0:1:12054113])
 	- Supports Spanish <es> (credits: IFerPe01 [STEAM_0:0:125631888])
 	- Supports Danish <da> (credits: The Outrageous Dane [STEAM_0:0:63184464])
-	- Supports Bulgarian <bg> (credits: [BA][Sk$Bh]Trick or treat KID! )
+	- Supports Bulgarian <bg> (credits: [BA][Sk$Bh]Trick or treat KID!)
