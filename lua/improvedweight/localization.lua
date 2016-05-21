@@ -11,6 +11,7 @@ localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
 localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
 localify.Bind( "es",    prefix.."language_es",    "Español" )
 localify.Bind( "da",    prefix.."language_da",    "Dansk" )
+localify.Bind( "bg",    prefix.."language_bg",    "Български" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -497,6 +498,59 @@ localify.Bind( "da", prefix.."hud_modified",             "Modificeret" )
 localify.Bind( "da", prefix.."notif_applied",            "Vægt påført" )
 localify.Bind( "da", prefix.."notif_copied",             "Vægt kopieret" )
 localify.Bind( "da", prefix.."notif_restored",           "Original vægt gendannet" )
+
+--[[--------------------------------------------------------------------------
+-- Bulgarian Localization
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "bg", prefix.."name",                     "Тегло - Подобрено" )
+localify.Bind( "bg", prefix.."desc",                     "Модифицира теглото на обектна единица" )
+localify.Bind( "bg", prefix.."left",                     "Приложи теглото" )
+localify.Bind( "bg", prefix.."right",                    "Копирай теглото" )
+localify.Bind( "bg", prefix.."reload",                   "Възстанови теглото" )
+-- Errors
+localify.Bind( "bg", prefix.."error_zero_weight",        "Трябва да приложите тегло по-голямо от 0" )
+localify.Bind( "bg", prefix.."error_invalid_phys",       "Тази обектна единица няма валиден физически обект (неможе да се модифицитра теглото)" )
+localify.Bind( "bg", prefix.."error_max_weight",         "Теглото неможе да надвишава максималното" )
+-- Labels
+localify.Bind( "bg", prefix.."label_colorscale",         "Цветна скала: " )
+localify.Bind( "bg", prefix.."label_weight",             "Тегло: " )
+localify.Bind( "bg", prefix.."label_decimals",           "Десетични знаци: " )
+localify.Bind( "bg", prefix.."label_tooltip_scale",      "Размер на подсказката: " )
+localify.Bind( "bg", prefix.."label_language",           "Език: " )
+localify.Bind( "bg", prefix.."label_credits",            "Преведено на Български от [BA][Sk$Bh]Trick or treat KID!" )
+-- Checkboxes
+localify.Bind( "bg", prefix.."checkbox_round",           "Изобразява закръглени тегла в подсказката" )
+localify.Bind( "bg", prefix.."checkbox_tooltip_show",    "Винаги показвай подсказка" )
+localify.Bind( "bg", prefix.."checkbox_tooltip_legacy",  "Използвай старинна подсказка" )
+localify.Bind( "bg", prefix.."checkbox_notifs",          "Изобразявай уведомления" )
+localify.Bind( "bg", prefix.."checkbox_notifs_sound",    "Свири уведомлителни звуци" )
+-- Comboboxes
+localify.Bind( "bg", prefix.."combobox_green_to_red",    "Зелено към Червено" )
+localify.Bind( "bg", prefix.."combobox_green_to_yellow", "Зелено към Жълто" )
+localify.Bind( "bg", prefix.."combobox_green_to_blue",   "Зелено към Синьо" )
+localify.Bind( "bg", prefix.."combobox_blue_to_red",     "Синьо към Червено" )
+localify.Bind( "bg", prefix.."combobox_none",            "Никакъв" )
+
+localify.Bind( "bg", prefix.."combobox_minimum",         "Минимално" )
+localify.Bind( "bg", prefix.."combobox_maximum",         "Максимално" )
+localify.Bind( "bg", prefix.."combobox_default",         "По подразбиране" )
+-- Descriptions
+localify.Bind( "bg", prefix.."help_colorscale",          "Добавя подсветка около обектната единица с цвят, представящ текущото тегло. Цветовете варират от минималния до максималния съответно." )
+localify.Bind( "bg", prefix.."help_decimals",            "Определя до колко десетични знака, теглата ще бъдат закръглени когато се изобразяват върху HUD. Нула означава че се изобразяват само цели числа." )
+localify.Bind( "bg", prefix.."help_tooltip_show",        "Показва подсказката дори когато инструмента не се използва." )
+localify.Bind( "bg", prefix.."help_tooltip_scale",       "Определя размера на подсказката когато се чертае HUD." )
+localify.Bind( "bg", prefix.."help_tooltip_legacy",      "Разрешава леко модифицирана подсказка използвана в по-стари версии на Garry's Mod." )
+localify.Bind( "bg", prefix.."help_notifs",              "Разрешава помощни уведомления при прилагане, копиране, или възстановяване на теглото на обектната единца." )
+localify.Bind( "bg", prefix.."help_notifs_sound",        "Разрешава уведомлителен звук, когато се прилага тегло на обектна единица." )
+-- HUD Text
+localify.Bind( "bg", prefix.."hud_original",             "Оригинален" )
+localify.Bind( "bg", prefix.."hud_modified",             "Модифициран" )
+-- Notifications
+localify.Bind( "bg", prefix.."notif_applied",            "Приложено тегло" )
+localify.Bind( "bg", prefix.."notif_copied",             "Копирано тегло" )
+localify.Bind( "bg", prefix.."notif_restored",           "Възстановено тегло" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
