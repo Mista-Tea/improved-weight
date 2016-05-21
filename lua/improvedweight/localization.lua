@@ -501,6 +501,7 @@ localify.Bind( "da", prefix.."notif_restored",           "Original vægt gendann
 
 --[[--------------------------------------------------------------------------
 -- Bulgarian Localization
+-- Big thanks to [BA][Sk$Bh]Trick or treat KID! for these translations!
 --------------------------------------------------------------------------]]--
 
 -- Tool Settings
