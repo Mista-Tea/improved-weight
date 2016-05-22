@@ -522,7 +522,7 @@ localify.Bind( "bg", prefix.."label_tooltip_scale",      "Размер на по
 localify.Bind( "bg", prefix.."label_language",           "Език: " )
 localify.Bind( "bg", prefix.."label_credits",            "Преведено на Български от [BA][Sk$Bh]Trick or treat KID!" )
 -- Checkboxes
-localify.Bind( "bg", prefix.."checkbox_round",           "Изобразява закръглени тегла в подсказката" )
+localify.Bind( "bg", prefix.."checkbox_round",           "Изобразявай закръглени тегла в подсказката" )
 localify.Bind( "bg", prefix.."checkbox_tooltip_show",    "Винаги показвай подсказка" )
 localify.Bind( "bg", prefix.."checkbox_tooltip_legacy",  "Използвай старинна подсказка" )
 localify.Bind( "bg", prefix.."checkbox_notifs",          "Изобразявай уведомления" )
@@ -532,7 +532,7 @@ localify.Bind( "bg", prefix.."combobox_green_to_red",    "Зелено към Ч
 localify.Bind( "bg", prefix.."combobox_green_to_yellow", "Зелено към Жълто" )
 localify.Bind( "bg", prefix.."combobox_green_to_blue",   "Зелено към Синьо" )
 localify.Bind( "bg", prefix.."combobox_blue_to_red",     "Синьо към Червено" )
-localify.Bind( "bg", prefix.."combobox_none",            "Никакъв" )
+localify.Bind( "bg", prefix.."combobox_none",            "Никаква" )
 
 localify.Bind( "bg", prefix.."combobox_minimum",         "Минимално" )
 localify.Bind( "bg", prefix.."combobox_maximum",         "Максимално" )
