@@ -14,6 +14,7 @@
 	- Jan 13th, 2016 :: Notification bug fix for DarkRP
 	- Apr 17th, 2016 :: Added Danish support
 	- May 21st, 2016 :: Added Bulgarian support
+	- Nov 12th, 2016 :: Added Russian support
 
 ###Fixes:
 	- Fixed unpooled net message error.
@@ -39,3 +40,4 @@
 	- Supports Spanish <es> (credits: IFerPe01 [STEAM_0:0:125631888])
 	- Supports Danish <da> (credits: The Outrageous Dane [STEAM_0:0:63184464])
 	- Supports Bulgarian <bg> (credits: [BA][Sk$Bh]Trick or treat KID!)
+	- Supports Russian <ru> (credits: Architector #4 [STEAM_0:1:38308154] and magic memes [STEAM_0:0:60429619])

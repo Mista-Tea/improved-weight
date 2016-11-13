@@ -12,6 +12,7 @@ localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
 localify.Bind( "es",    prefix.."language_es",    "Español" )
 localify.Bind( "da",    prefix.."language_da",    "Dansk" )
 localify.Bind( "bg",    prefix.."language_bg",    "Български" )
+localify.Bind( "ru",    prefix.."language_ru",    "русский")
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -552,6 +553,60 @@ localify.Bind( "bg", prefix.."hud_modified",             "Модифициран
 localify.Bind( "bg", prefix.."notif_applied",            "Приложено тегло" )
 localify.Bind( "bg", prefix.."notif_copied",             "Копирано тегло" )
 localify.Bind( "bg", prefix.."notif_restored",           "Възстановено тегло" )
+
+--[[--------------------------------------------------------------------------
+-- Russian Localization
+-- Big thanks to Architector #4 (STEAM_0:1:38308154) and magic memes (STEAM_0:0:60429619) for these translations!
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "ru", prefix.."name",                     "Вес - Улучшенный" )
+localify.Bind( "ru", prefix.."desc",                     "Изменяет вес объектов" )
+localify.Bind( "ru", prefix.."left",                     "Применить вес" )
+localify.Bind( "ru", prefix.."right",                    "Скопировать вес" )
+localify.Bind( "ru", prefix.."reload",                   "Сбросить настройки вес" )
+-- Errors
+localify.Bind( "ru", prefix.."error_zero_weight",        "Вы должны применить вес больше чем 0" )
+localify.Bind( "ru", prefix.."error_invalid_phys",       "Этот объект не имеет физических свойств (невозможно изменить вес)" )
+localify.Bind( "ru", prefix.."error_max_weight",         "Вес не должен превышать максимум" )
+-- Labels
+localify.Bind( "ru", prefix.."label_colorscale",         "Градиент цвета: " )
+localify.Bind( "ru", prefix.."label_weight",             "Вес: " )
+localify.Bind( "ru", prefix.."label_decimals",           "Цифер после точки: " )
+localify.Bind( "ru", prefix.."label_tooltip_scale",      "Размер подсказки: " )
+localify.Bind( "ru", prefix.."label_language",           "Язык: " )
+localify.Bind( "ru", prefix.."label_credits",            "Русский перевод от Architector #4 (STEAM_0:1:38308154) и magic memes (STEAM_0:0:60429619)" )
+-- Checkboxes
+localify.Bind( "ru", prefix.."checkbox_round",           "Отображать округлённые значения в подсказке" )
+localify.Bind( "ru", prefix.."checkbox_tooltip_show",    "Всегда отображать подсказку" )
+localify.Bind( "ru", prefix.."checkbox_tooltip_legacy",  "Использовать старую подсказку" )
+localify.Bind( "ru", prefix.."checkbox_notifs",          "Отображать уведомления" )
+localify.Bind( "ru", prefix.."checkbox_notifs_sound",    "Проигрывать звуки уведомления" )
+-- Comboboxes
+localify.Bind( "ru", prefix.."combobox_green_to_red",    "Из зелёного в красный" )
+localify.Bind( "ru", prefix.."combobox_green_to_yellow", "Из зелёного в жёлтый" )
+localify.Bind( "ru", prefix.."combobox_green_to_blue",   "Из зелёного в синий" )
+localify.Bind( "ru", prefix.."combobox_blue_to_red",     "Из синего в красный" )
+localify.Bind( "ru", prefix.."combobox_none",            "Без перехода" )
+
+localify.Bind( "ru", prefix.."combobox_minimum",         "Минимум" )
+localify.Bind( "ru", prefix.."combobox_maximum",         "Максимум" )
+localify.Bind( "ru", prefix.."combobox_default",         "По умолчанию" )
+-- Descriptions
+localify.Bind( "ru", prefix.."help_colorscale",          "Добавляет сияние вокруг объекта со цветом, соответствующим его весу. Цвет меняется с минимума до максимума включительно" )
+localify.Bind( "ru", prefix.."help_decimals",            "Устанавливает количество цифр после точки при показе веса в интерфейсе. Нуль приводит к отображению целых чисел." )
+localify.Bind( "ru", prefix.."help_tooltip_show",        "Показывать подсказку даже если этот инструмент не используется" )
+localify.Bind( "ru", prefix.."help_tooltip_scale",       "Устанавливает размер подсказки при отображении её в интерфейсе" )
+localify.Bind( "ru", prefix.."help_tooltip_legacy",      "Сменяет стиль подсказки на чуть-чуть изменённый её вариант из старых версий Garry's Mod" )
+localify.Bind( "ru", prefix.."help_notifs",              "Включает полезные сообщения при применении, копировании, или сбросе веса объекта" )
+localify.Bind( "ru", prefix.."help_notifs_sound",        "Включает звуки уведомления при изменении веса объекта" )
+-- HUD Text
+localify.Bind( "ru", prefix.."hud_original",             "Оригинал" )
+localify.Bind( "ru", prefix.."hud_modified",             "Изменённый" )
+-- Notifications
+localify.Bind( "ru", prefix.."notif_applied",            "Вес применён" )
+localify.Bind( "ru", prefix.."notif_copied",             "Вес скопирован" )
+localify.Bind( "ru", prefix.."notif_restored",           "Восстановлен начальный вес" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
