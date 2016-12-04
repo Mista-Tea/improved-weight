@@ -306,15 +306,16 @@ if ( CLIENT ) then
 			-- gets the client's colorscale setting for Lerp'ing the halo/label color
 			local colormode  = GetConVarNumber( mode.."_colorscale" )
 			local colorscale = colorscales[ colormode ]
-			local col = colorscale and colorscale.Min or color_white
+			local color      = colorscale and colorscale.Min or color_white
 			
+			-- check to see if the user has a color scale selected before adding a halo to the entity
 			if ( colorscale ) then
 				local frac = (modWeight or 0) / MAX_WEIGHT
-				col = LerpColor( frac, colorscale.Min, colorscale.Max )
+				color = LerpColor( frac, colorscale.Min, colorscale.Max )
+				
+				-- draws the halo around the trace entity (using either the Lerp'd colorscale or white)
+				halo.Add( {ent}, color )
 			end
-			
-			-- draws the halo around the trace entity (using either the Lerp'd colorscale or white)
-			halo.Add( {ent}, col )
 			
 			-- calculates the weight multiplier (how many times larger/smaller the modified weight is compared to the original weight)
 			local mult = math.Round( (modWeight or 1) / (oriWeight or 1), useRounding and decimals or 2 )
@@ -322,7 +323,7 @@ if ( CLIENT ) then
 			-- draws the multicolored tooltip on the client's screen
 			ComplexText( font,
 				{ weightLabels.original..": ", oriWeightStr, "  |  "..weightLabels.modified..": ", modWeightStr, " ("..mult.."x)" }, 
-				{ textcol, COLOR_BLUE, textcol, COLOR_BLUE, col }, pos.x, pos.y, 0, 0,
+				{ textcol, COLOR_BLUE, textcol, COLOR_BLUE, color }, pos.x, pos.y, 0, 0,
 				function( x, y, w, h )
 					x = x - w/2
 					draw.RoundedBox( rad, x-10, y-5, w+20, h+10, bgcol )
