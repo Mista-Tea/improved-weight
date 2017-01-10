@@ -28,8 +28,7 @@ local mode = TOOL.Mode -- defined by the name of this file (default should be we
 -- Modules & Dependencies
 --------------------------------------------------------------------------]]--
 
--- needed for localization support (depends on GMod locale: "gmod_language")
-include( "improvedweight/localify.lua" )
+include( "improvedweight/localify.lua" )                     -- needed for localization support (depends on GMod locale: "gmod_language")
 localify.LoadSharedFile( "improvedweight/localization.lua" ) -- loads the file containing localized phrases
 local L = localify.Localize                                  -- used for translating string tokens into localized phrases
 local prefix = "#tool."..mode.."."                           -- prefix used for this tool's localization tokens
@@ -145,10 +144,37 @@ if ( CLIENT ) then
 	-- CVars
 	--------------------------------------------------------------------------]]--
 	
+	-- get the cvars if they're valid (e.g., editing and auto-refreshing this file).
+	-- otherwise they won't be valid yet when first ran and we have to wait until
+	-- TOOL:Init() gets called (below) to set them up
+	local cvarTool       = GetConVar( "gmod_toolmode" )
+	local cvarTooltip    = GetConVar( mode.."_tooltip_show" )
+	local cvarLegacy     = GetConVar( mode.."_tooltip_legacy" )
+	local cvarRounded    = GetConVar( mode.."_rounded" )
+	local cvarDecimals   = GetConVar( mode.."_decimals" )
+	local cvarColorScale = GetConVar( mode.."_colorscale" )
+	
+	-- we're creating a bunch of local functions here using the cvars above so that we don't have to
+	-- rely on the TOOL object (which can be problematic when trying to use it inside a hook).
+	-- these should be pretty much identical to the TOOL functions created near the top of this file
+	local function shouldRound()            return cvarRounded:GetBool()   end
+	local function shouldDrawTooltip()      return cvarTooltip:GetBool()   end
+	local function shouldUseLegacyTooltip() return cvarLegacy:GetBool()    end
+	local function getDecimals()            return cvarDecimals:GetInt()   end
+	local function getColorScale()          return cvarColorScale:GetInt() end
+	
 	function TOOL:Init()
 		-- setup the fonts we'll be using when drawing the HUD
 		surface.CreateFont( mode.."_tooltip",        { font = "coolvetica", size = GetConVarNumber( mode.."_tooltip_scale", 24 ), weight = 500 } )
 		surface.CreateFont( mode.."_tooltip_legacy", { font = "coolvetica", size = 24, weight = 500 } )
+		
+		-- now the convars are truly valid, so reassign the upvalues
+		cvarTool       = GetConVar( "gmod_toolmode" )
+		cvarTooltip    = GetConVar( mode.."_tooltip_show" )
+		cvarLegacy     = GetConVar( mode.."_tooltip_legacy" )
+		cvarRounded    = GetConVar( mode.."_rounded" )
+		cvarDecimals   = GetConVar( mode.."_decimals" )
+		cvarColorScale = GetConVar( mode.."_colorscale" )
 	end
 	
 	--[[--------------------------------------------------------------------------
@@ -249,7 +275,7 @@ if ( CLIENT ) then
 		
 		-- if they aren't forcing the tooltip to always show, check if they have the toolgun out and have weight selected
 		local wep = ply:GetActiveWeapon()
-		if ( not tobool( ply:GetInfo( mode.."_tooltip_show" ) ) and (not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or ply:GetInfo( "gmod_toolmode" ) ~= mode) ) then return end
+		if ( not shouldDrawTooltip() and (not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or cvarTool:GetString() ~= mode) ) then return end
 		
 		local tr  = ply:GetEyeTrace()
 		local ent = tr.Entity
@@ -257,8 +283,8 @@ if ( CLIENT ) then
 		if ( not IsValid( ent ) ) then return end
 		if ( ent:IsPlayer() )     then return end
 	
-		local useRounding = GetConVarNumber( mode.."_rounded" ) == 1
-		local decimals    = GetConVarNumber( mode.."_decimals" )
+		local useRounding = shouldRound()
+		local decimals    = getDecimals()
 		
 		-- retrieves the networked weight values that were set on the entity from the server
 		local oriWeight = improvedweight.GetOriginalWeight( ent, MISSING_WEIGHT ) 
@@ -280,7 +306,7 @@ if ( CLIENT ) then
 		local pos = (ent:GetPos() + ent:OBBCenter()):ToScreen()
 		local x, y = pos.x, pos.y
 		
-		local useLegacy = GetConVarNumber( mode.."_tooltip_legacy" ) == 1
+		local useLegacy = shouldUseLegacyTooltip()
 		
 		-- Use the legacy tooltip style, though slightly modified to ditch the need for cam.3D2D()
 		if ( useLegacy ) then
@@ -305,7 +331,7 @@ if ( CLIENT ) then
 			rad   = 0
 			
 			-- gets the client's colorscale setting for Lerp'ing the halo/label color
-			local colormode  = GetConVarNumber( mode.."_colorscale" )
+			local colormode  = getColorScale()
 			local colorscale = colorscales[ colormode ]
 			local color      = colorscale and colorscale.Min or color_white
 			
