@@ -12,7 +12,8 @@ localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
 localify.Bind( "es",    prefix.."language_es",    "Español" )
 localify.Bind( "da",    prefix.."language_da",    "Dansk" )
 localify.Bind( "bg",    prefix.."language_bg",    "Български" )
-localify.Bind( "ru",    prefix.."language_ru",    "русский")
+localify.Bind( "ru",    prefix.."language_ru",    "русский" )
+localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -593,13 +594,13 @@ localify.Bind( "ru", prefix.."combobox_minimum",         "Минимум" )
 localify.Bind( "ru", prefix.."combobox_maximum",         "Максимум" )
 localify.Bind( "ru", prefix.."combobox_default",         "По умолчанию" )
 -- Descriptions
-localify.Bind( "ru", prefix.."help_colorscale",          "Добавляет сияние вокруг объекта со цветом, соответствующим его весу. Цвет меняется с минимума до максимума включительно" )
+localify.Bind( "ru", prefix.."help_colorscale",          "Добавляет сияние вокруг объекта со цветом, соответствующим его весу. Цвет меняется с минимума до максимума включительно." )
 localify.Bind( "ru", prefix.."help_decimals",            "Устанавливает количество цифр после точки при показе веса в интерфейсе. Нуль приводит к отображению целых чисел." )
-localify.Bind( "ru", prefix.."help_tooltip_show",        "Показывать подсказку даже если этот инструмент не используется" )
-localify.Bind( "ru", prefix.."help_tooltip_scale",       "Устанавливает размер подсказки при отображении её в интерфейсе" )
-localify.Bind( "ru", prefix.."help_tooltip_legacy",      "Сменяет стиль подсказки на чуть-чуть изменённый её вариант из старых версий Garry's Mod" )
-localify.Bind( "ru", prefix.."help_notifs",              "Включает полезные сообщения при применении, копировании, или сбросе веса объекта" )
-localify.Bind( "ru", prefix.."help_notifs_sound",        "Включает звуки уведомления при изменении веса объекта" )
+localify.Bind( "ru", prefix.."help_tooltip_show",        "Показывать подсказку даже если этот инструмент не используется." )
+localify.Bind( "ru", prefix.."help_tooltip_scale",       "Устанавливает размер подсказки при отображении её в интерфейсе." )
+localify.Bind( "ru", prefix.."help_tooltip_legacy",      "Сменяет стиль подсказки на чуть-чуть изменённый её вариант из старых версий Garry's Mod." )
+localify.Bind( "ru", prefix.."help_notifs",              "Включает полезные сообщения при применении, копировании, или сбросе веса объекта." )
+localify.Bind( "ru", prefix.."help_notifs_sound",        "Включает звуки уведомления при изменении веса объекта." )
 -- HUD Text
 localify.Bind( "ru", prefix.."hud_original",             "Оригинал" )
 localify.Bind( "ru", prefix.."hud_modified",             "Изменённый" )
@@ -607,6 +608,59 @@ localify.Bind( "ru", prefix.."hud_modified",             "Изменённый" 
 localify.Bind( "ru", prefix.."notif_applied",            "Вес применён" )
 localify.Bind( "ru", prefix.."notif_copied",             "Вес скопирован" )
 localify.Bind( "ru", prefix.."notif_restored",           "Восстановлен начальный вес" )
+
+--[[--------------------------------------------------------------------------
+-- Korean Localization
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "ko", prefix.."name",                     "향상된 - 무게" )
+localify.Bind( "ko", prefix.."desc",                     "물체의 무게를 수정합니다" )
+localify.Bind( "ko", prefix.."left",                     "무게 적용" )
+localify.Bind( "ko", prefix.."right",                    "무게 복사" )
+localify.Bind( "ko", prefix.."reload",                   "무게 재설정" )
+-- Errors
+localify.Bind( "ko", prefix.."error_zero_weight",        "무게는 0 이상이여야 합니다" )
+localify.Bind( "ko", prefix.."error_invalid_phys",       "이 엔티티는 물리적인 물체가 아닙니다 (무게를 설정할 수 없음)" )
+localify.Bind( "ko", prefix.."error_max_weight",         "무게는 최대값을 넘을 수 없습니다" )
+-- Labels
+localify.Bind( "ko", prefix.."label_colorscale",         "무게에 따른 색 변경: " )
+localify.Bind( "ko", prefix.."label_weight",             "무게: " )
+localify.Bind( "ko", prefix.."label_decimals",           "소수점 표시: " )
+localify.Bind( "ko", prefix.."label_tooltip_scale",      "툴팁 크기: " )
+localify.Bind( "ko", prefix.."label_language",           "언어: " )
+localify.Bind( "ko", prefix.."label_credits",            "한국어 FCB 에 의해 번역됨 (STEAM_0:1:32029495)" )
+-- Checkboxes
+localify.Bind( "ko", prefix.."checkbox_round",           "툴팁에서 총 무게 표시하기" )
+localify.Bind( "ko", prefix.."checkbox_tooltip_show",    "항상 툴팁 보이기" )
+localify.Bind( "ko", prefix.."checkbox_tooltip_legacy",  "구버전 툴팁 사용하기" )
+localify.Bind( "ko", prefix.."checkbox_notifs",          "알림 표시" )
+localify.Bind( "ko", prefix.."checkbox_notifs_sound",    "알림 소리 재생하기" )
+-- Comboboxes
+localify.Bind( "ko", prefix.."combobox_green_to_red",    "녹색에서 빨간색으로" )
+localify.Bind( "ko", prefix.."combobox_green_to_yellow", "녹색에서 노란색으로" )
+localify.Bind( "ko", prefix.."combobox_green_to_blue",   "녹색에서 파란색으로" )
+localify.Bind( "ko", prefix.."combobox_blue_to_red",     "파란색에서 빨간색으로" )
+localify.Bind( "ko", prefix.."combobox_none",            "색 없음" )
+
+localify.Bind( "ko", prefix.."combobox_minimum",         "최저한의" )
+localify.Bind( "ko", prefix.."combobox_maximum",         "최대의" )
+localify.Bind( "ko", prefix.."combobox_default",         "디폴트" )
+-- Descriptions
+localify.Bind( "ko", prefix.."help_colorscale",          "현재 무게를 색을 입혀 표시합니다. 낮은 무게에서 높은 무게로 갈수록 점점 그 색으로 변합니다." )
+localify.Bind( "ko", prefix.."help_decimals",            "반올림을 하지 않은 소수점을 몇째 자리까지 표시할지 결정합니다. 0은 소수점을 표시하지 않습니다." )
+localify.Bind( "ko", prefix.."help_tooltip_show",        "무게 툴이 사용되지 않을때에도 툴팁이 계속 뜨게합니다." )
+localify.Bind( "ko", prefix.."help_tooltip_scale",       "화면에 표시될 툴팁의 크기를 설정합니다." )
+localify.Bind( "ko", prefix.."help_tooltip_legacy",      "이전 게리모드에서 사용된 툴팁을 사용할 수 있습니다." )
+localify.Bind( "ko", prefix.."help_notifs",              "당신이 설정하거나, 복사하거나 혹은 물체의 무게를 재설정할때 나타나는 도움말을 표시합니다." )
+localify.Bind( "ko", prefix.."help_notifs_sound",        "물체의 무게를 설정할 때 알림음이 재생되게 합니다." )
+-- HUD Text
+localify.Bind( "ko", prefix.."hud_original",             "기존 무게" )
+localify.Bind( "ko", prefix.."hud_modified",             "수정된 무게" )
+-- Notifications
+localify.Bind( "ko", prefix.."notif_applied",            "무게 설정됨" )
+localify.Bind( "ko", prefix.."notif_copied",             "무게 복사됨" )
+localify.Bind( "ko", prefix.."notif_restored",           "기존 무게로 재설정됨" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
