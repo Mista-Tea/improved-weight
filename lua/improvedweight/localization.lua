@@ -14,7 +14,6 @@ localify.Bind( "da",    prefix.."language_da",    "Dansk" )
 localify.Bind( "bg",    prefix.."language_bg",    "Български" )
 localify.Bind( "ru",    prefix.."language_ru",    "русский" )
 localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
-localify.Bind( "fr",    prefix.."language_fr",    "Français" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -49,6 +48,10 @@ localify.Bind( "en", prefix.."combobox_green_to_yellow", "Green to Yellow" )
 localify.Bind( "en", prefix.."combobox_green_to_blue",   "Green to Blue" )
 localify.Bind( "en", prefix.."combobox_blue_to_red",     "Blue to Red" )
 localify.Bind( "en", prefix.."combobox_none",            "None" )
+
+localify.Bind( "en", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "en", prefix.."combobox_maximum",         "Maximum" )
+localify.Bind( "en", prefix.."combobox_default",         "Default" )
 -- Descriptions
 localify.Bind( "en", prefix.."help_colorscale",          "Adds a halo around the target entity with a color representing its current weight. The colors go from minimum to maximum respectively." )
 localify.Bind( "en", prefix.."help_decimals",            "Determines how many decimal places the weights should be rounded to when displaying them in the HUD. Zero means whole numbers are displayed." )
@@ -99,6 +102,10 @@ localify.Bind( "pt-br", prefix.."combobox_green_to_yellow", "Verde para Amarelo"
 localify.Bind( "pt-br", prefix.."combobox_green_to_blue",   "Verde para Azul" )
 localify.Bind( "pt-br", prefix.."combobox_blue_to_red",     "Azul para Vermelho" )
 localify.Bind( "pt-br", prefix.."combobox_none",            "Nenhum" )
+
+localify.Bind( "pt-br", prefix.."combobox_minimum",         "Mínimo" )
+localify.Bind( "pt-br", prefix.."combobox_maximum",         "Máximo" )
+localify.Bind( "pt-br", prefix.."combobox_default",         "Padrão" )
 -- Descriptions
 localify.Bind( "pt-br", prefix.."help_colorscale",          "Adiciona uma áurea em volta do alvo com uma cor representando sua massa atual. As cores vão de mínima para máxima, respectivamente." )
 localify.Bind( "pt-br", prefix.."help_decimals",            "Determina quantas casas decimais a massa deve ser arredondada quando mostradas no HUD. Zero significa que números inteiros serão mostrados." )
@@ -149,6 +156,10 @@ localify.Bind( "sv-se", prefix.."combobox_green_to_yellow", "Grön till Gul" )
 localify.Bind( "sv-se", prefix.."combobox_green_to_blue",   "Grön till Blå" )
 localify.Bind( "sv-se", prefix.."combobox_blue_to_red",     "Blå till Röd" )
 localify.Bind( "sv-se", prefix.."combobox_none",            "Inget" )
+
+localify.Bind( "sv-se", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "sv-se", prefix.."combobox_maximum",         "Maximal" )
+localify.Bind( "sv-se", prefix.."combobox_default",         "Standard" )
 -- Descriptions
 localify.Bind( "sv-se", prefix.."help_colorscale",          "Adderar en färgkontur runt målenheten som indikerar dess nuvarande vikt. Färgen går från minimum till maximalt respektive." )
 localify.Bind( "sv-se", prefix.."help_decimals",            "Bestämmer antalet värdesiffor som vikten avrundas till när framförda inom HUD. Noll innebär att värderna är avrundade till heltal." )
@@ -200,6 +211,10 @@ localify.Bind( "ja", prefix.."combobox_green_to_yellow", "緑から黄色" )
 localify.Bind( "ja", prefix.."combobox_green_to_blue",   "緑から青" )
 localify.Bind( "ja", prefix.."combobox_blue_to_red",     "青から赤" )
 localify.Bind( "ja", prefix.."combobox_none",            "なし" )
+
+localify.Bind( "ja", prefix.."combobox_minimum",         "最小" )
+localify.Bind( "ja", prefix.."combobox_maximum",         "最高" )
+localify.Bind( "ja", prefix.."combobox_default",         "既定" )
 -- Descriptions
 localify.Bind( "ja", prefix.."help_colorscale",          "エンティティの現在の重量を表す色のハローをエンティティの周りに追加します。各色は最小から最高までを表します。" )
 localify.Bind( "ja", prefix.."help_decimals",            "HUDで重量が表示される時の小数点の最下位を設定します。0に設定された場合、最後まで表示されます。" )
@@ -250,6 +265,10 @@ localify.Bind( "nl", prefix.."combobox_green_to_yellow", "Groen naar Geel" )
 localify.Bind( "nl", prefix.."combobox_green_to_blue",   "Groen naar Blauw" )
 localify.Bind( "nl", prefix.."combobox_blue_to_red",     "Blauw naar Rood" )
 localify.Bind( "nl", prefix.."combobox_none",            "Geen" )
+
+localify.Bind( "nl", prefix.."combobox_minimum",         "Minimaal" )
+localify.Bind( "nl", prefix.."combobox_maximum",         "Maximaal" )
+localify.Bind( "nl", prefix.."combobox_default",         "Standaart" )
 -- Descriptions
 localify.Bind( "nl", prefix.."help_colorscale",          "Voegt een halo toe rond het object met een kleur die het huidige gewicht weergeeft." )
 localify.Bind( "nl", prefix.."help_decimals",            "Bepaalt hoeveel decimalen er zullen worden gebruikt om het gewicht weer te geven in de HUD. Nul betekent dat er alleen ronde getallen worden gebruikt." )
@@ -300,6 +319,10 @@ localify.Bind( "pl", prefix.."combobox_green_to_yellow", "Zielony do żółtego"
 localify.Bind( "pl", prefix.."combobox_green_to_blue",   "Zielony do Niebieskiego" )
 localify.Bind( "pl", prefix.."combobox_blue_to_red",     "Niebieski do Czerwonego" )
 localify.Bind( "pl", prefix.."combobox_none",            "żaden" )
+
+localify.Bind( "pl", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "pl", prefix.."combobox_maximum",         "Maximum" )
+localify.Bind( "pl", prefix.."combobox_default",         "Domyślny" )
 -- Descriptions
 localify.Bind( "pl", prefix.."help_colorscale",          "Dodaje poświatę około obiektu z kolorem reprezentującym  jego obecny ciężar. Kolory zmieniają się odpowiednio od minimum do maximum." )
 localify.Bind( "pl", prefix.."help_decimals",            "Ustala do ilu miejsc po przecinku ciężar powinien zostać zaokrąglony podczas wyświetlania na ekranie. Zero oznacza pełne liczby." )
@@ -350,6 +373,10 @@ localify.Bind( "de", prefix.."combobox_green_to_yellow", "Grün nach Gelb" )
 localify.Bind( "de", prefix.."combobox_green_to_blue",   "Grün nach Blau" )
 localify.Bind( "de", prefix.."combobox_blue_to_red",     "Blau nach Rot" )
 localify.Bind( "de", prefix.."combobox_none",            "Keine" )
+
+localify.Bind( "de", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "de", prefix.."combobox_maximum",         "Maximum" )
+localify.Bind( "de", prefix.."combobox_default",         "Standard" )
 -- Descriptions
 localify.Bind( "de", prefix.."help_colorscale",          "Zeigt einen Lichtschein um das gewählte Objekt. Die Farbe des Scheins entspricht der Masse des Objekts. Je schwerer die Masse desto stärker die zweite Farbe und umgekehrt." )
 localify.Bind( "de", prefix.."help_decimals",            "Bestimmt auf wie viele Dezimalstellen die Masse im HUD gerundet wird. Bei NULL werden nur ganze Zahlen dargestellt." )
@@ -400,6 +427,10 @@ localify.Bind( "es", prefix.."combobox_green_to_yellow", "Verde a Amarillo" )
 localify.Bind( "es", prefix.."combobox_green_to_blue",   "Verde a Azul" )
 localify.Bind( "es", prefix.."combobox_blue_to_red",     "Azul a Rojo" )
 localify.Bind( "es", prefix.."combobox_none",            "Ninguno" )
+
+localify.Bind( "es", prefix.."combobox_minimum",         "Mínimo" )
+localify.Bind( "es", prefix.."combobox_maximum",         "Máximo" )
+localify.Bind( "es", prefix.."combobox_default",         "Predefinido" )
 -- Descriptions
 localify.Bind( "es", prefix.."help_colorscale",          "Añade un halo alrededor de la entidad con un color representando su peso actual. Los colores van de mínimo a máximo respectivamente." )
 localify.Bind( "es", prefix.."help_decimals",            "Determina cuántos con lugares decimales el peso debería estar rodeado cuando se muestra en el HUD. Cero significa que todos los números están mostrándose." )
@@ -450,6 +481,10 @@ localify.Bind( "da", prefix.."combobox_green_to_yellow", "Grøn til Gul" )
 localify.Bind( "da", prefix.."combobox_green_to_blue",   "Grøn til Blå" )
 localify.Bind( "da", prefix.."combobox_blue_to_red",     "Blå til Rød" )
 localify.Bind( "da", prefix.."combobox_none",            "Ingen" )
+
+localify.Bind( "da", prefix.."combobox_minimum",         "Minimum" )
+localify.Bind( "da", prefix.."combobox_maximum",         "Maximum" )
+localify.Bind( "da", prefix.."combobox_default",         "Standard" )
 -- Descriptions
 localify.Bind( "da", prefix.."help_colorscale",          "Tilføjer en halo omkring den valgte enhed, med en farve der viser dens aktuelle vægt. Farverne går fra minimum til maximum respektivt." )
 localify.Bind( "da", prefix.."help_decimals",            "Bestemmer hvor mange decimaler vægtene vil blive afrundet til når de vises i HUD'en. Der vises hele tal hvis sat til 0." )
@@ -500,6 +535,10 @@ localify.Bind( "bg", prefix.."combobox_green_to_yellow", "Зелено към Ж
 localify.Bind( "bg", prefix.."combobox_green_to_blue",   "Зелено към Синьо" )
 localify.Bind( "bg", prefix.."combobox_blue_to_red",     "Синьо към Червено" )
 localify.Bind( "bg", prefix.."combobox_none",            "Никаква" )
+
+localify.Bind( "bg", prefix.."combobox_minimum",         "Минимално" )
+localify.Bind( "bg", prefix.."combobox_maximum",         "Максимално" )
+localify.Bind( "bg", prefix.."combobox_default",         "По подразбиране" )
 -- Descriptions
 localify.Bind( "bg", prefix.."help_colorscale",          "Добавя подсветка около обектната единица с цвят, представящ текущото тегло. Цветовете варират от минималния до максималния съответно." )
 localify.Bind( "bg", prefix.."help_decimals",            "Определя до колко десетични знака, теглата ще бъдат закръглени когато се изобразяват върху HUD. Нула означава че се изобразяват само цели числа." )
@@ -550,6 +589,10 @@ localify.Bind( "ru", prefix.."combobox_green_to_yellow", "Из зелёного 
 localify.Bind( "ru", prefix.."combobox_green_to_blue",   "Из зелёного в синий" )
 localify.Bind( "ru", prefix.."combobox_blue_to_red",     "Из синего в красный" )
 localify.Bind( "ru", prefix.."combobox_none",            "Без перехода" )
+
+localify.Bind( "ru", prefix.."combobox_minimum",         "Минимум" )
+localify.Bind( "ru", prefix.."combobox_maximum",         "Максимум" )
+localify.Bind( "ru", prefix.."combobox_default",         "По умолчанию" )
 -- Descriptions
 localify.Bind( "ru", prefix.."help_colorscale",          "Добавляет сияние вокруг объекта со цветом, соответствующим его весу. Цвет меняется с минимума до максимума включительно." )
 localify.Bind( "ru", prefix.."help_decimals",            "Устанавливает количество цифр после точки при показе веса в интерфейсе. Нуль приводит к отображению целых чисел." )
@@ -599,6 +642,10 @@ localify.Bind( "ko", prefix.."combobox_green_to_yellow", "녹색에서 노란색
 localify.Bind( "ko", prefix.."combobox_green_to_blue",   "녹색에서 파란색으로" )
 localify.Bind( "ko", prefix.."combobox_blue_to_red",     "파란색에서 빨간색으로" )
 localify.Bind( "ko", prefix.."combobox_none",            "색 없음" )
+
+localify.Bind( "ko", prefix.."combobox_minimum",         "최저한의" )
+localify.Bind( "ko", prefix.."combobox_maximum",         "최대의" )
+localify.Bind( "ko", prefix.."combobox_default",         "디폴트" )
 -- Descriptions
 localify.Bind( "ko", prefix.."help_colorscale",          "현재 무게를 색을 입혀 표시합니다. 낮은 무게에서 높은 무게로 갈수록 점점 그 색으로 변합니다." )
 localify.Bind( "ko", prefix.."help_decimals",            "반올림을 하지 않은 소수점을 몇째 자리까지 표시할지 결정합니다. 0은 소수점을 표시하지 않습니다." )
@@ -697,6 +744,10 @@ localify.Bind( "", prefix.."combobox_green_to_yellow", "" )
 localify.Bind( "", prefix.."combobox_green_to_blue",   "" )
 localify.Bind( "", prefix.."combobox_blue_to_red",     "" )
 localify.Bind( "", prefix.."combobox_none",            "" )
+
+localify.Bind( "", prefix.."combobox_minimum",         "" )
+localify.Bind( "", prefix.."combobox_maximum",         "" )
+localify.Bind( "", prefix.."combobox_default",         "" )
 -- Descriptions
 localify.Bind( "", prefix.."help_colorscale",          "" )
 localify.Bind( "", prefix.."help_decimals",            "" )
