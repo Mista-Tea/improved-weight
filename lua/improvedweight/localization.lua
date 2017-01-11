@@ -14,6 +14,7 @@ localify.Bind( "da",    prefix.."language_da",    "Dansk" )
 localify.Bind( "bg",    prefix.."language_bg",    "Български" )
 localify.Bind( "ru",    prefix.."language_ru",    "русский" )
 localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
+localify.Bind( "fr",    prefix.."language_fr",    "Français" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -695,6 +696,7 @@ localify.Bind( "fr", prefix.."combobox_green_to_yellow", "Vert à Jaune" )
 localify.Bind( "fr", prefix.."combobox_green_to_blue",   "Vert à Bleu" )
 localify.Bind( "fr", prefix.."combobox_blue_to_red",     "Bleu à Rouge" )
 localify.Bind( "fr", prefix.."combobox_none",            "Aucune" )
+localify.Bind( "fr", prefix.."combobox_default",         "Défaut" )
 -- Descriptions
 localify.Bind( "fr", prefix.."help_colorscale",          "Ajoute un halo autour de l'entité ciblée avec une couleur pour représenter son poids actuel. Les couleurs vont respectivement du minimum au maxium." )
 localify.Bind( "fr", prefix.."help_decimals",            "Détermine à combien de nombres après la virgule le poids devrait être arrondi quand affiché dans le HUD. Zéro n'affichera que des nombres entiers." )
