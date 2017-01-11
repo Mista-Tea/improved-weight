@@ -616,6 +616,55 @@ localify.Bind( "ko", prefix.."notif_copied",             "무게 복사됨" )
 localify.Bind( "ko", prefix.."notif_restored",           "기존 무게로 재설정됨" )
 
 --[[--------------------------------------------------------------------------
+-- French Localization
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "fr", prefix.."name",                     "Poids - Amelioré" )
+localify.Bind( "fr", prefix.."desc",                     "Modifie le poids d'une entité" )
+localify.Bind( "fr", prefix.."left",                     "Appliquer le poids à l'entité" )
+localify.Bind( "fr", prefix.."right",                    "Copier le poids de l'entité" )
+localify.Bind( "fr", prefix.."reload",                   "Réinitialiser le poids de l'entité" )
+-- Errors
+localify.Bind( "fr", prefix.."error_zero_weight",        "Vous devez sélectionner un poids supérieur à 0" )
+localify.Bind( "fr", prefix.."error_invalid_phys",       "Cette entitée n'a pas d'objet de physiques valide (vous ne pouvez pas en modifier le poids)" )
+localify.Bind( "fr", prefix.."error_max_weight",         "Le poids ne peut pas excéder le maximum autorisé" )
+-- Labels
+localify.Bind( "fr", prefix.."label_colorscale",         "Échelle de Couleurs: " )
+localify.Bind( "fr", prefix.."label_weight",             "Poids: " )
+localify.Bind( "fr", prefix.."label_decimals",           "Décimales: " )
+localify.Bind( "fr", prefix.."label_tooltip_scale",      "Taille de l'Info-Bulle: " )
+localify.Bind( "fr", prefix.."label_language",           "Langue: " )
+localify.Bind( "fr", prefix.."label_credits",            "Traduit en français par Vulpelix (STEAM_0:0:188400109)" )
+-- Checkboxes
+localify.Bind( "fr", prefix.."checkbox_round",           "Bords arrondis sur l'info-bulle" )
+localify.Bind( "fr", prefix.."checkbox_tooltip_show",    "Toujours montrer l'info-bulle" )
+localify.Bind( "fr", prefix.."checkbox_tooltip_legacy",  "Utiliser l'ancienne info-bulle" )
+localify.Bind( "fr", prefix.."checkbox_notifs",          "Afficher les notifications" )
+localify.Bind( "fr", prefix.."checkbox_notifs_sound",    "Activer le son des notifications" )
+-- Comboboxes
+localify.Bind( "fr", prefix.."combobox_green_to_red",    "Vert à Rouge" )
+localify.Bind( "fr", prefix.."combobox_green_to_yellow", "Vert à Jaune" )
+localify.Bind( "fr", prefix.."combobox_green_to_blue",   "Vert à Bleu" )
+localify.Bind( "fr", prefix.."combobox_blue_to_red",     "Bleu à Rouge" )
+localify.Bind( "fr", prefix.."combobox_none",            "Aucune" )
+-- Descriptions
+localify.Bind( "fr", prefix.."help_colorscale",          "Ajoute un halo autour de l'entité ciblée avec une couleur pour représenter son poids actuel. Les couleurs vont respectivement du minimum au maxium." )
+localify.Bind( "fr", prefix.."help_decimals",            "Détermine à combien de nombres après la virgule le poids devrait être arrondi quand affiché dans le HUD. Zéro n'affichera que des nombres entiers." )
+localify.Bind( "fr", prefix.."help_tooltip_show",        "Affiche l'info-bulle même lorsque l'outil n'est pas utilisé." )
+localify.Bind( "fr", prefix.."help_tooltip_scale",       "Modifie la taille de l'info-bulle." )
+localify.Bind( "fr", prefix.."help_tooltip_legacy",      "Affiche une info-bulle légèrement modifiée utilisée dans les anciennes verions de Garry's Mod." )
+localify.Bind( "fr", prefix.."help_notifs",              "Activer les notifications lorsque vous appliquez, copiez ou réintialisez le poids d'une entité." )
+localify.Bind( "fr", prefix.."help_notifs_sound",        "Activer le son des notifications lorsque vous appliquez le poids à une entité." )
+-- HUD Text
+localify.Bind( "fr", prefix.."hud_original",             "Original" )
+localify.Bind( "fr", prefix.."hud_modified",             "Modifié" )
+-- Notifications
+localify.Bind( "fr", prefix.."notif_applied",            "Poids appliqué à l'entité" )
+localify.Bind( "fr", prefix.."notif_copied",             "Poids de l'entité copié" )
+localify.Bind( "fr", prefix.."notif_restored",           "Poids original restauré" )
+
+--[[--------------------------------------------------------------------------
 -- <Other> Localization
 --------------------------------------------------------------------------]]--
 --[[
