@@ -16,6 +16,7 @@
 	- May 21st, 2016 :: Added Bulgarian support
 	- Nov 12th, 2016 :: Added Russian support
 	- Jan  9th, 2017 :: Added Korean support
+	- Jan 10th, 2017 :: Added French support
 
 ###Fixes:
 	- Fixed unpooled net message error.
@@ -43,3 +44,4 @@
 	- Supports Bulgarian <bg> (credits: [BA][Sk$Bh]Trick or treat KID!)
 	- Supports Russian <ru> (credits: Architector #4 [STEAM_0:1:38308154] and magic memes [STEAM_0:0:60429619])
 	- Supports Korean <ko> (credits: FCB [STEAM_0:1:32029495])
+	- Supports French <fr> (credits: Vulpelix [STEAM_0:0:188400109])
