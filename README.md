@@ -1,11 +1,11 @@
-#Improved Weight
+# Improved Weight
 
-###Author:
+### Author:
 	- Original            :: Spoco     (STEAM_0:1:289018) 
 	- Updated for GMod 13 :: Marii     (STEAM_0:1:16015332)
 	- Rewritten           :: Mista Tea (STEAM_0:0:27507323)
 	
-###Changelog:
+### Changelog:
 	- Dec 28th, 2015 :: Added to GitHub
 	- Dec 28th, 2015 :: Added to Workshop
 	- Dec 29th, 2015 :: Added German support
@@ -18,11 +18,11 @@
 	- Jan  9th, 2017 :: Added Korean support
 	- Jan 10th, 2017 :: Added French support
 
-###Fixes:
+### Fixes:
 	- Fixed unpooled net message error.
 	- Fixed incorrect weights being reported due to lazy caching by model in old weight tool.
 	
-###Tweaks:
+### Tweaks:
 	- Added colorscale options -- draws a colored halo around viewed entities that represents how heavy it is (combobox).
 	- Added ability to round reported weights from 0 to 8 decimal places (tickbox and slider).
 	- Added proper support for the legacy tooltip GUI (tickbox).
@@ -32,7 +32,7 @@
 	- Added support for localization of every phrase in the tool menu and tooltip HUD (Localify module).
 	- Added ability to change localization (tickbox).
 	
-###Multi-language Support:
+### Multi-language Support:
 	- Supports Brazilian Portuguese <pt-br> (credits: Sommer [STEAM_0:0:57791547])
 	- Supports Swedish <sv-se> (credits: Christian [STEAM_0:0:36373825] and Jeff [STEAM_0:0:25982100])
 	- Supports Japanese <ja> (credits: daigennki/seihai [STEAM_0:1:43031440])
