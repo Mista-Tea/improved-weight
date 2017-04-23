@@ -155,6 +155,9 @@ if ( CLIENT ) then
 	local cvarDecimals   = GetConVar( mode.."_decimals" )
 	local cvarColorScale = GetConVar( mode.."_colorscale" )
 	
+	-- additional check to ensure hooks don't run unless the tool has initialized
+	local initialized = false
+	
 	-- we're creating a bunch of local functions here using the cvars above so that we don't have to
 	-- rely on the TOOL object (which can be problematic when trying to use it inside a hook).
 	-- these should be pretty much identical to the TOOL functions created near the top of this file
@@ -176,6 +179,9 @@ if ( CLIENT ) then
 		cvarRounded    = GetConVar( mode.."_rounded" )
 		cvarDecimals   = GetConVar( mode.."_decimals" )
 		cvarColorScale = GetConVar( mode.."_colorscale" )
+		
+		-- signify that the tool has initialized
+		initialized = true
 	end
 	
 	--[[--------------------------------------------------------------------------
@@ -271,6 +277,9 @@ if ( CLIENT ) then
 	--	Draws the tooltip onto the client's screen whenever they have the improved weight tool selected.
 	--]]--
 	local function DrawHUD()
+		-- don't do any processing unless the tool has fully initialized
+		if ( not initialized ) then return end
+		
 		local ply = LocalPlayer()
 		if ( not IsValid( ply ) ) then return end
 		
