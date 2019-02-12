@@ -17,6 +17,7 @@
 	- Nov 12th, 2016 :: Added Russian support
 	- Jan  9th, 2017 :: Added Korean support
 	- Jan 10th, 2017 :: Added French support
+	- Feb 11th, 2019 :: Added Estonian support
 
 ### Fixes:
 	- Fixed unpooled net message error.
@@ -45,3 +46,4 @@
 	- Supports Russian <ru> (credits: Architector #4 [STEAM_0:1:38308154] and magic memes [STEAM_0:0:60429619])
 	- Supports Korean <ko> (credits: FCB [STEAM_0:1:32029495])
 	- Supports French <fr> (credits: Vulpelix [STEAM_0:0:188400109])
+	- Supports Estonian <et> (credits: [EE] Jamairis McWay [STEAM_0:1:168225547])
