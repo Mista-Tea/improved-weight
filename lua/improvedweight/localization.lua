@@ -15,6 +15,7 @@ localify.Bind( "bg",    prefix.."language_bg",    "Български" )
 localify.Bind( "ru",    prefix.."language_ru",    "русский" )
 localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
 localify.Bind( "fr",    prefix.."language_fr",    "Français" )
+localify.Bind( "et",    prefix.."language_et",    "Eesti" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -676,6 +677,57 @@ localify.Bind( "fr", prefix.."hud_modified",             "Modifié" )
 localify.Bind( "fr", prefix.."notif_applied",            "Poids appliqué à l'entité" )
 localify.Bind( "fr", prefix.."notif_copied",             "Poids de l'entité copié" )
 localify.Bind( "fr", prefix.."notif_restored",           "Poids original restauré" )
+
+--[[--------------------------------------------------------------------------
+-- Estonian Localization
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "et", prefix.."name",                     "Kaal - täiustatud" )
+localify.Bind( "et", prefix.."desc",                     "Muudab üksuse kaalu" )
+localify.Bind( "et", prefix.."left",                     "Rakenda kaal" )
+localify.Bind( "et", prefix.."right",                    "Kopeerimise kaal" )
+localify.Bind( "et", prefix.."reload",                   "Lähtesta kaal" )
+-- Errors
+localify.Bind( "et", prefix.."error_zero_weight",        "Peate rakendama kaalu, mis on suurem kui 0" )
+localify.Bind( "et", prefix.."error_invalid_phys",       "See üksus ei oma kehtivat füüsikaobjekti (ei saa muuta kaalu)" )
+localify.Bind( "et", prefix.."error_max_weight",         "Kaal ei tohi ületada max" )
+-- Labels
+localify.Bind( "et", prefix.."label_colorscale",         "Värviklass: " )
+localify.Bind( "et", prefix.."label_weight",             "Kaal: " )
+localify.Bind( "et", prefix.."label_decimals",           "Kümnendkohad: " )
+localify.Bind( "et", prefix.."label_tooltip_scale",      "Tooltipi skaala: " )
+localify.Bind( "et", prefix.."label_language",           "Keel: " )
+localify.Bind( "et", prefix.."label_credits",            "Eesti tõlge - [EE] Jamairis McWay (STEAM_0:1:168225547)" )
+-- Checkboxes
+localify.Bind( "et", prefix.."checkbox_round",           "Näita ümardatud kaalusid tööriista näites" )
+localify.Bind( "et", prefix.."checkbox_tooltip_show",    "Näita alati tööriista" )
+localify.Bind( "et", prefix.."checkbox_tooltip_legacy",  "Kasutage pärandit" )
+localify.Bind( "et", prefix.."checkbox_notifs",          "Kuva teateid" )
+localify.Bind( "et", prefix.."checkbox_notifs_sound",    "Esitatakse teate heli" )
+-- Comboboxes
+localify.Bind( "et", prefix.."combobox_green_to_red",    "Roheline kuni punane" )
+localify.Bind( "et", prefix.."combobox_green_to_yellow", "Roheline kuni kollane" )
+localify.Bind( "et", prefix.."combobox_green_to_blue",   "Roheline kuni sinine" )
+localify.Bind( "et", prefix.."combobox_blue_to_red",     "Sinine kuni punane" )
+localify.Bind( "et", prefix.."combobox_none",            "Puudub" )
+localify.Bind( "et", prefix.."combobox_default",         "Vaikimisi" )
+-- Descriptions
+localify.Bind( "et", prefix.."help_colorscale",          "Lisab sihtühiku ümber halo, mille värv esindab selle praegust kaalu. Värvid lähevad vastavalt miinimumist maksimumini." )
+localify.Bind( "et", prefix.."help_decimals",            "Määrab, kui palju kümnendkohad kaalud ümardatakse, kui neid HUD-s kuvatakse. Null tähendab täisarvude kuvamist." )
+localify.Bind( "et", prefix.."help_tooltip_show",        "Näitab tööriista ka siis, kui kaalutööriista ei kasutata." )
+localify.Bind( "et", prefix.."help_tooltip_scale",       "Seadistab tööriista suuruse HUD-i joonistamisel." )
+localify.Bind( "et", prefix.."help_tooltip_legacy",      "Võimaldab veidi modifitseeritud tööriista kasutada Garry Modi vanemates versioonides." )
+localify.Bind( "et", prefix.."help_notifs",              "Võimaldab kasutada kasulikke teatisi, kui rakendatakse, kopeeritakse või lähtestate ettevõtte kehakaalu." )
+localify.Bind( "et", prefix.."help_notifs_sound",        "Võimaldab teavitamise heli, kui rakendate kehale kaalu." )
+-- HUD Text
+localify.Bind( "et", prefix.."hud_original",             "Originaal" )
+localify.Bind( "et", prefix.."hud_modified",             "Muudetud" )
+-- Notifications
+localify.Bind( "et", prefix.."notif_applied",            "Rakendatud kaal" )
+localify.Bind( "et", prefix.."notif_copied",             "Kopeeritud kaal" )
+localify.Bind( "et", prefix.."notif_restored",           "Taastatud esialgne kaal" )
+
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
