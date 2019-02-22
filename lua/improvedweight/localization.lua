@@ -16,6 +16,7 @@ localify.Bind( "ru",    prefix.."language_ru",    "русский" )
 localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
 localify.Bind( "fr",    prefix.."language_fr",    "Français" )
 localify.Bind( "et",    prefix.."language_et",    "Eesti" )
+localify.Bind( "th",    prefix.."language_th",    "ไทย" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -728,6 +729,55 @@ localify.Bind( "et", prefix.."notif_applied",            "Rakendatud kaal" )
 localify.Bind( "et", prefix.."notif_copied",             "Kopeeritud kaal" )
 localify.Bind( "et", prefix.."notif_restored",           "Taastatud esialgne kaal" )
 
+--[[--------------------------------------------------------------------------
+-- Thai Localization
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "th", prefix.."name",                     "น้ำหนัก - ปรับปรุง" )
+localify.Bind( "th", prefix.."desc",                     "แก้ไขน้ำหนักของเอนทิตี" )
+localify.Bind( "th", prefix.."left",                     "ใช้น้ำหนัก" )
+localify.Bind( "th", prefix.."right",                    "คัดลอกน้ำหนัก" )
+localify.Bind( "th", prefix.."reload",                   "รีเซ็ตน้ำหนัก" )
+-- Errors
+localify.Bind( "th", prefix.."error_zero_weight",        "คุณต้องใช้น้ำหนักที่มากกว่า 0" )
+localify.Bind( "th", prefix.."error_invalid_phys",       "เอนทิตีนี้ไม่มีวัตถุฟิสิกส์ที่ถูกต้อง (ไม่สามารถแก้ไขน้ำหนักได้)" )
+localify.Bind( "th", prefix.."error_max_weight",         "น้ำหนักต้องไม่เกินกว่าค่าสูงสุด" )
+-- Labels
+localify.Bind( "th", prefix.."label_colorscale",         "สเกลสี: " )
+localify.Bind( "th", prefix.."label_weight",             "น้ำหนัก: " )
+localify.Bind( "th", prefix.."label_decimals",           "ตำแหน่งทศนิยม: " )
+localify.Bind( "th", prefix.."label_tooltip_scale",      "คู่มืออุปกรณ์มาตราส่วน: " )
+localify.Bind( "th", prefix.."label_language",           "ภาษา: " )
+localify.Bind( "th", prefix.."label_credits",            "ไทย การแปลโดย [ATA] Combine Empire Reich (STEAM_0:1:77082118)" )
+-- Checkboxes
+localify.Bind( "th", prefix.."checkbox_round",           "แสดงตุ้มน้ำหนักแบบกลมในคำแนะนำเครื่องมือ" )
+localify.Bind( "th", prefix.."checkbox_tooltip_show",    "แสดงคำแนะนำเครื่องมือเสมอ" )
+localify.Bind( "th", prefix.."checkbox_tooltip_legacy",  "ใช้คำแนะนำเครื่องมือแบบเดิม" )
+localify.Bind( "th", prefix.."checkbox_notifs",          "แสดงการแจ้งเตือน" )
+localify.Bind( "th", prefix.."checkbox_notifs_sound",    "เล่นเสียงแจ้งเตือน" )
+-- Comboboxes
+localify.Bind( "th", prefix.."combobox_green_to_red",    "เขียวถึงแดง" )
+localify.Bind( "th", prefix.."combobox_green_to_yellow", "เขียวถึงเหลือง" )
+localify.Bind( "th", prefix.."combobox_green_to_blue",   "เขียวถึงน้ำเงิน" )
+localify.Bind( "th", prefix.."combobox_blue_to_red",     "น้ำเงินถึงแดง" )
+localify.Bind( "th", prefix.."combobox_none",            "ไม่มี" )
+localify.Bind( "th", prefix.."combobox_default",         "ค่าเริ่มต้น" )
+-- Descriptions
+localify.Bind( "th", prefix.."help_colorscale",          "เพิ่มรัศมีรอบเอนทิตีเป้าหมายด้วยสีที่แสดงถึงน้ำหนักปัจจุบัน สีเริ่มจากต่ำสุดไปสูงสุดตามลำดับ" )
+localify.Bind( "th", prefix.."help_decimals",            "กำหนดว่าจะปัดเศษทศนิยมกี่ตำแหน่งเมื่อแสดงใน HUD ศูนย์หมายถึงแสดงตัวเลขทั้งหมด" )
+localify.Bind( "th", prefix.."help_tooltip_show",        "แสดงคำแนะนำเครื่องมือแม้ว่าจะไม่ได้ใช้เครื่องมือน้ำหนัก" )
+localify.Bind( "th", prefix.."help_tooltip_scale",       "กำหนดขนาดของคำแนะนำเครื่องมือเมื่อวาด HUD" )
+localify.Bind( "th", prefix.."help_tooltip_legacy",      "เปิดใช้งานคำแนะนำเครื่องมือที่ปรับเปลี่ยนเล็กน้อยที่ใช้ในรุ่นเก่าของ Garry's Mod" )
+localify.Bind( "th", prefix.."help_notifs",              "เปิดใช้งานการแจ้งเตือนที่เป็นประโยชน์เมื่อนำไปใช้คัดลอกหรือรีเซ็ตน้ำหนักของเอนทิตี" )
+localify.Bind( "th", prefix.."help_notifs_sound",        "เปิดใช้งานเสียงแจ้งเตือนเมื่อใช้น้ำหนักกับเอนทิตี" )
+-- HUD Text
+localify.Bind( "th", prefix.."hud_original",             "ต้นฉบับ" )
+localify.Bind( "th", prefix.."hud_modified",             "ดัดแปลง" )
+-- Notifications
+localify.Bind( "th", prefix.."notif_applied",            "น้ำหนักประยุกต์" )
+localify.Bind( "th", prefix.."notif_copied",             "คัดลอกน้ำหนักแล้ว" )
+localify.Bind( "th", prefix.."notif_restored",           "เรียกคืนน้ำหนักดั้งเดิม" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization

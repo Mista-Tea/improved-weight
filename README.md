@@ -18,6 +18,7 @@
 	- Jan  9th, 2017 :: Added Korean support
 	- Jan 10th, 2017 :: Added French support
 	- Feb 11th, 2019 :: Added Estonian support
+	- Feb 21st, 2019 :: Added Thai support
 
 ### Fixes:
 	- Fixed unpooled net message error.
@@ -47,3 +48,4 @@
 	- Supports Korean <ko> (credits: FCB [STEAM_0:1:32029495])
 	- Supports French <fr> (credits: Vulpelix [STEAM_0:0:188400109])
 	- Supports Estonian <et> (credits: [EE] Jamairis McWay [STEAM_0:1:168225547])
+	- Supports Thai <th> (credits: [ATA] Combine Empire Reich [STEAM_0:1:77082118])

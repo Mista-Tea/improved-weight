@@ -22,6 +22,7 @@
 		- Jan  9th, 2017 :: Added Korean support
 		- Jan 10th, 2017 :: Added French support
 		- Feb 11th, 2019 :: Added Estonian support
+		- Feb 21st, 2019 :: Added Thai support
 ----------------------------------------------------------------------------]]
 
 local mode = TOOL.Mode -- defined by the name of this file (default should be weight_improved)
