@@ -555,6 +555,8 @@ function TOOL:Think()
 	end
 end
 
+if ( SERVER ) then return end
+
 --[[--------------------------------------------------------------------------
 --
 -- 	TOOL.BuildCPanel( panel )
@@ -620,17 +622,6 @@ local function buildCPanel( cpanel )
 		Options    = languageOptions,
 	}
 	
-	-- listen for changes to the localify language and reload the tool's menu to update the localizations
-	cvars.AddChangeCallback( "localify_language", function( name, old, new )
-		weightLabels.original = L(prefix.."hud_original")
-		weightLabels.modified = L(prefix.."hud_modified")
-		
-		local cpanel = controlpanel.Get( mode )
-		if ( not IsValid( cpanel ) ) then return end
-		cpanel:ClearControls()
-		buildCPanel( cpanel )
-	end, "improvedweight" )
-	
 	cpanel:AddControl( "ComboBox", languages )
 	cpanel:ControlHelp( "\n" .. L(prefix.."label_credits") )
 	cpanel:AddControl( "Label",    { Text = L(prefix.."desc") } )
@@ -655,5 +646,16 @@ local function buildCPanel( cpanel )
 	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs_sound"),   Command = mode.."_notifs_sound" } )
 	cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
 end
+
+-- listen for changes to the localify language and reload the tool's menu to update the localizations
+cvars.AddChangeCallback( "localify_language", function( name, old, new )
+	weightLabels.original = L(prefix.."hud_original")
+	weightLabels.modified = L(prefix.."hud_modified")
+	
+	local cpanel = controlpanel.Get( mode )
+	if ( not IsValid( cpanel ) ) then return end
+	cpanel:ClearControls()
+	buildCPanel( cpanel )
+end, "improvedweight" )
 
 TOOL.BuildCPanel = buildCPanel
