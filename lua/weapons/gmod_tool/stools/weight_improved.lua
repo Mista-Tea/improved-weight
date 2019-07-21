@@ -374,6 +374,109 @@ if ( CLIENT ) then
 	end
 	hook.Add( "HUDPaint", mode.."_hud", DrawHUD )
 	
+	--[[--------------------------------------------------------------------------
+	--
+	-- 	TOOL.BuildCPanel( panel )
+	--
+	--]]--
+	local function buildCPanel( cpanel )
+		-- quick presets for default settings
+		local presets = { 
+			Label      = "Presets",
+			MenuButton = 1,
+			Folder     = "weight",
+			Options = {
+				[L(prefix.."combobox_default")] = {
+					[mode.."_colorscale"]     = "1",
+					[mode.."_decimals"]       = "2",
+					[mode.."_mass"]           = "1",
+					[mode.."_notifs"]         = "1",
+					[mode.."_notifs_sound"]   = "1",
+					[mode.."_rounded"]        = "1",
+					[mode.."_tooltip_show"]   = "0",
+					[mode.."_tooltip_legacy"] = "0",
+					[mode.."_tooltip_scale"]  = "24",
+				},
+			},
+			CVars = { 
+				mode.."_colorscale",
+				mode.."_decimals",
+				mode.."_mass",
+				mode.."_notifs",
+				mode.."_notifs_sound",
+				mode.."_rounded",
+				mode.."_tooltip_show",
+				mode.."_tooltip_legacy",
+				mode.."_tooltip_scale",
+			}
+		}
+
+		-- enumerations for colorscales to use when drawing the HUD
+		local colors = {
+			Label = L(prefix.."label_colorscale"),
+			MenuButton = 0,
+			Options = {
+				[L(prefix.."combobox_green_to_red")]    = { [mode.."_colorscale"] = 1 },
+				[L(prefix.."combobox_green_to_yellow")] = { [mode.."_colorscale"] = 2 },
+				[L(prefix.."combobox_green_to_blue")]   = { [mode.."_colorscale"] = 3 },
+				[L(prefix.."combobox_blue_to_red")]     = { [mode.."_colorscale"] = 4 },
+				[L(prefix.."combobox_none")]            = { [mode.."_colorscale"] = 0 }
+			}
+		}
+
+		-- populate the table of valid languages that clients can switch between
+		local languageOptions = {}
+
+		for code, tbl in pairs( localify.GetLocalizations() ) do
+			if ( not L(prefix.."language_"..code, code) ) then continue end
+
+			languageOptions[ L(prefix.."language_"..code, code) ] = { localify_language = code }
+		end
+
+		local languages = {
+			Label      = L(prefix.."label_language"),
+			MenuButton = 0,
+			Options    = languageOptions,
+		}
+
+		cpanel:AddControl( "ComboBox", languages )
+		cpanel:ControlHelp( "\n" .. L(prefix.."label_credits") )
+		cpanel:AddControl( "Label",    { Text = L(prefix.."desc") } )
+		cpanel:AddControl( "ComboBox", presets )
+		cpanel:ControlHelp( "" )
+		cpanel:AddControl( "Slider",   { Label = L(prefix.."label_weight"),         Command = mode.."_mass", Type = "Float", Min = "0.01", Max = MAX_WEIGHT } )
+		cpanel:ControlHelp( "" )
+		cpanel:AddControl( "ComboBox", colors )
+		cpanel:ControlHelp( "" )
+		cpanel:ControlHelp( L(prefix.."help_colorscale") .. "\n" )
+		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_round"),          Command = mode.."_rounded" } )
+		cpanel:AddControl( "Slider",   { Label = L(prefix.."label_decimals"),          Command = mode.."_decimals", Type = "Numeric", Min = "0", Max = "8" } )
+		cpanel:ControlHelp( L(prefix.."help_decimals") .. "\n" )
+		cpanel:AddControl( "Slider",   { Label = L(prefix.."label_tooltip_scale"),     Command = mode.."_tooltip_scale", Type = "Numeric", Min = "1", Max = "128" } )
+		cpanel:ControlHelp( L(prefix.."help_tooltip_scale") .. "\n" )
+		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_show"),   Command = mode.."_tooltip_show" } )
+		cpanel:ControlHelp( L(prefix.."help_tooltip_show") )
+		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_legacy"), Command = mode.."_tooltip_legacy" } )
+		cpanel:ControlHelp( L(prefix.."help_tooltip_legacy") )
+		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs"),         Command = mode.."_notifs" } )
+		cpanel:ControlHelp( L(prefix.."help_notifs") )
+		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs_sound"),   Command = mode.."_notifs_sound" } )
+		cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
+	end
+
+	-- listen for changes to the localify language and reload the tool's menu to update the localizations
+	cvars.AddChangeCallback( "localify_language", function( name, old, new )
+		weightLabels.original = L(prefix.."hud_original")
+		weightLabels.modified = L(prefix.."hud_modified")
+
+		local cpanel = controlpanel.Get( mode )
+		if ( not IsValid( cpanel ) ) then return end
+		cpanel:ClearControls()
+		buildCPanel( cpanel )
+	end, "improvedweight" )
+
+	TOOL.BuildCPanel = buildCPanel
+	
 elseif ( SERVER ) then
 	
 	util.AddNetworkString( mode.."_notif" )
@@ -554,106 +657,3 @@ function TOOL:Think()
 		end
 	end
 end
-
---[[--------------------------------------------------------------------------
---
--- 	TOOL.BuildCPanel( panel )
---
---]]--
-local function buildCPanel( cpanel )
-	-- quick presets for default settings
-	local presets = { 
-		Label      = "Presets",
-		MenuButton = 1,
-		Folder     = "weight",
-		Options = {
-			[L(prefix.."combobox_default")] = {
-				[mode.."_colorscale"]     = "1",
-				[mode.."_decimals"]       = "2",
-				[mode.."_mass"]           = "1",
-				[mode.."_notifs"]         = "1",
-				[mode.."_notifs_sound"]   = "1",
-				[mode.."_rounded"]        = "1",
-				[mode.."_tooltip_show"]   = "0",
-				[mode.."_tooltip_legacy"] = "0",
-				[mode.."_tooltip_scale"]  = "24",
-			},
-		},
-		CVars = { 
-			mode.."_colorscale",
-			mode.."_decimals",
-			mode.."_mass",
-			mode.."_notifs",
-			mode.."_notifs_sound",
-			mode.."_rounded",
-			mode.."_tooltip_show",
-			mode.."_tooltip_legacy",
-			mode.."_tooltip_scale",
-		}
-	}
-	
-	-- enumerations for colorscales to use when drawing the HUD
-	local colors = {
-		Label = L(prefix.."label_colorscale"),
-		MenuButton = 0,
-		Options = {
-			[L(prefix.."combobox_green_to_red")]    = { [mode.."_colorscale"] = 1 },
-			[L(prefix.."combobox_green_to_yellow")] = { [mode.."_colorscale"] = 2 },
-			[L(prefix.."combobox_green_to_blue")]   = { [mode.."_colorscale"] = 3 },
-			[L(prefix.."combobox_blue_to_red")]     = { [mode.."_colorscale"] = 4 },
-			[L(prefix.."combobox_none")]            = { [mode.."_colorscale"] = 0 }
-		}
-	}
-
-	-- populate the table of valid languages that clients can switch between
-	local languageOptions = {}
-	
-	for code, tbl in pairs( localify.GetLocalizations() ) do
-		if ( not L(prefix.."language_"..code, code) ) then continue end
-		
-		languageOptions[ L(prefix.."language_"..code, code) ] = { localify_language = code }
-	end
-	
-	local languages = {
-		Label      = L(prefix.."label_language"),
-		MenuButton = 0,
-		Options    = languageOptions,
-	}
-	
-	-- listen for changes to the localify language and reload the tool's menu to update the localizations
-	cvars.AddChangeCallback( "localify_language", function( name, old, new )
-		weightLabels.original = L(prefix.."hud_original")
-		weightLabels.modified = L(prefix.."hud_modified")
-		
-		local cpanel = controlpanel.Get( mode )
-		if ( not IsValid( cpanel ) ) then return end
-		cpanel:ClearControls()
-		buildCPanel( cpanel )
-	end, "improvedweight" )
-	
-	cpanel:AddControl( "ComboBox", languages )
-	cpanel:ControlHelp( "\n" .. L(prefix.."label_credits") )
-	cpanel:AddControl( "Label",    { Text = L(prefix.."desc") } )
-	cpanel:AddControl( "ComboBox", presets )
-	cpanel:ControlHelp( "" )
-	cpanel:AddControl( "Slider",   { Label = L(prefix.."label_weight"),         Command = mode.."_mass", Type = "Float", Min = "0.01", Max = MAX_WEIGHT } )
-	cpanel:ControlHelp( "" )
-	cpanel:AddControl( "ComboBox", colors )
-	cpanel:ControlHelp( "" )
-	cpanel:ControlHelp( L(prefix.."help_colorscale") .. "\n" )
-	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_round"),          Command = mode.."_rounded" } )
-	cpanel:AddControl( "Slider",   { Label = L(prefix.."label_decimals"),          Command = mode.."_decimals", Type = "Numeric", Min = "0", Max = "8" } )
-	cpanel:ControlHelp( L(prefix.."help_decimals") .. "\n" )
-	cpanel:AddControl( "Slider",   { Label = L(prefix.."label_tooltip_scale"),     Command = mode.."_tooltip_scale", Type = "Numeric", Min = "1", Max = "128" } )
-	cpanel:ControlHelp( L(prefix.."help_tooltip_scale") .. "\n" )
-	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_show"),   Command = mode.."_tooltip_show" } )
-	cpanel:ControlHelp( L(prefix.."help_tooltip_show") )
-	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_legacy"), Command = mode.."_tooltip_legacy" } )
-	cpanel:ControlHelp( L(prefix.."help_tooltip_legacy") )
-	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs"),         Command = mode.."_notifs" } )
-	cpanel:ControlHelp( L(prefix.."help_notifs") )
-	cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs_sound"),   Command = mode.."_notifs_sound" } )
-	cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
-end
-
-TOOL.BuildCPanel = buildCPanel
