@@ -315,7 +315,7 @@ if ( CLIENT ) then
 		local modWeightStr = string.Comma( modWeight or "N/A" )
 		
 		-- gets the vector position of the center of the entity and translates it to x/y coordinates on the client's screen
-		local pos = (ent:GetPos() + ent:OBBCenter()):ToScreen()
+		local pos = tr.HitPos:ToScreen()
 		local x, y = pos.x, pos.y
 		
 		local useLegacy = shouldUseLegacyTooltip()
