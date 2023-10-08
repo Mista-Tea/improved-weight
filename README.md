@@ -8,17 +8,18 @@
 ### Changelog:
 	- Dec 28th, 2015 :: Added to GitHub
 	- Dec 28th, 2015 :: Added to Workshop
-	- Dec 29th, 2015 :: Added German support
-	- Jan  1st, 2016 :: Added Spanish support
+	- Dec 29th, 2015 :: Added German translation
+	- Jan  1st, 2016 :: Added Spanish translation
 	- Jan  8th, 2016 :: Language switching improvements
 	- Jan 13th, 2016 :: Notification bug fix for DarkRP
-	- Apr 17th, 2016 :: Added Danish support
-	- May 21st, 2016 :: Added Bulgarian support
-	- Nov 12th, 2016 :: Added Russian support
-	- Jan  9th, 2017 :: Added Korean support
-	- Jan 10th, 2017 :: Added French support
-	- Feb 11th, 2019 :: Added Estonian support
-	- Feb 21st, 2019 :: Added Thai support
+	- Apr 17th, 2016 :: Added Danish translation
+	- May 21st, 2016 :: Added Bulgarian translation
+	- Nov 12th, 2016 :: Added Russian translation
+	- Jan  9th, 2017 :: Added Korean translation
+	- Jan 10th, 2017 :: Added French translation
+	- Feb 11th, 2019 :: Added Estonian translation
+	- Feb 21st, 2019 :: Added Thai translation
+	- Oct  7th, 2023 :: Added Turkish translation
 
 ### Fixes:
 	- Fixed unpooled net message error.
@@ -49,3 +50,4 @@
 	- Supports French <fr> (credits: Vulpelix [STEAM_0:0:188400109])
 	- Supports Estonian <et> (credits: [EE] Jamairis McWay [STEAM_0:1:168225547])
 	- Supports Thai <th> (credits: [ATA] Combine Empire Reich [STEAM_0:1:77082118])
+	- Supports Turkish <tr> (credits: Matt [STEAM_0:1:241718138])
