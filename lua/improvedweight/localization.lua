@@ -6,7 +6,6 @@ localify.Bind( "en",    prefix.."language_en",    "English" )
 localify.Bind( "pt-br", prefix.."language_pt-br", "Português do Brasil" )
 localify.Bind( "sv-se", prefix.."language_sv-se", "Svenska" )
 localify.Bind( "ja",    prefix.."language_ja",    "日本語" )
-localify.Bind( "zh-cn", prefix.."language_zh-cn",    "简体中文" )
 localify.Bind( "nl",    prefix.."language_nl",    "Nederlandse" )
 localify.Bind( "pl",    prefix.."language_pl",    "Polskie" )
 localify.Bind( "de",    prefix.."language_de",    "Deutsch" )
@@ -18,6 +17,8 @@ localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
 localify.Bind( "fr",    prefix.."language_fr",    "Français" )
 localify.Bind( "et",    prefix.."language_et",    "Eesti" )
 localify.Bind( "th",    prefix.."language_th",    "ไทย" )
+localify.Bind( "tr",    prefix.."language_tr",    "Türkçe" )
+localify.Bind( "zh-cn", prefix.."language_zh-cn", "简体中文" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -780,6 +781,62 @@ localify.Bind( "th", prefix.."notif_applied",            "น้ำหนัก�
 localify.Bind( "th", prefix.."notif_copied",             "คัดลอกน้ำหนักแล้ว" )
 localify.Bind( "th", prefix.."notif_restored",           "เรียกคืนน้ำหนักดั้งเดิม" )
 
+--[[--------------------------------------------------------------------------
+-- Turkish Localization
+-- Big thanks to Matt (STEAM_0:1:241718138) for these translations!
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "tr", prefix.."name",                     "Geliştirilmiş Ağırlık" )
+localify.Bind( "tr", prefix.."desc",                     "Varlığın ağırlığını değiştirir" )
+localify.Bind( "tr", prefix.."left",                     "Ağırlığı uygula" )
+localify.Bind( "tr", prefix.."right",                    "Ağırlığı kopyala" )
+localify.Bind( "tr", prefix.."reload",                   "Ağırlığı sıfırla" )
+-- Errors
+localify.Bind( "tr", prefix.."error_zero_weight",        "0'dan büyük bir ağırlık uygulamanız gerekir" )
+localify.Bind( "tr", prefix.."error_invalid_phys",       "Bu varlığın geçerli bir fizik nesnesi yok (ağırlık değiştirilemez)" )
+localify.Bind( "tr", prefix.."error_max_weight",         "Maksimum ağırlığı geçemez" )
+-- Labels
+localify.Bind( "tr", prefix.."label_colorscale",         "Renk Ölçeği: " )
+localify.Bind( "tr", prefix.."label_weight",             "Ağırlık: " )
+localify.Bind( "tr", prefix.."label_decimals",           "Ondalık: " )
+localify.Bind( "tr", prefix.."label_tooltip_scale",      "İpucu Ölçeği: " )
+localify.Bind( "tr", prefix.."label_language",           "Dil: Türkçe" )
+localify.Bind( "tr", prefix.."label_credits",            "Türkçeye Matt tarafından çevrilmiştir (STEAM_0:1:241718138)" )
+-- Checkboxes
+localify.Bind( "tr", prefix.."checkbox_round",           "Yuvarlanmış ağırlıkları ipucunda göster" )
+localify.Bind( "tr", prefix.."checkbox_tooltip_show",    "Her zaman ipuçlarını göster" )
+localify.Bind( "tr", prefix.."checkbox_tooltip_legacy",  "Eski ipuçlarını kullan" )
+localify.Bind( "tr", prefix.."checkbox_notifs",          "Bildirimleri göster" )
+localify.Bind( "tr", prefix.."checkbox_notifs_sound",    "Bildirim sesleri çal" )
+-- Comboboxes
+localify.Bind( "tr", prefix.."combobox_green_to_red",    "Yeşilden Kırmızıya" )
+localify.Bind( "tr", prefix.."combobox_green_to_yellow", "Yeşilden Sarıya" )
+localify.Bind( "tr", prefix.."combobox_green_to_blue",   "Yeşilden Maviye" )
+localify.Bind( "tr", prefix.."combobox_blue_to_red",     "Maviden Kırmızıya" )
+localify.Bind( "tr", prefix.."combobox_none",            "Hiçbiri" )
+localify.Bind( "tr", prefix.."combobox_default",         "Varsayılan" )
+-- Descriptions
+localify.Bind( "tr", prefix.."help_colorscale",          "Hedef varlığa, mevcut ağırlığını temsil eden bir renkle bir ışık halkası ekler. Renkler sırasıyla minimumdan maksimuma doğru gider." )
+localify.Bind( "tr", prefix.."help_decimals",            "Ağırlıkların HUD'da görüntülenirken kaç ondalık basamağa yuvarlanması gerektiğini belirler. Sıfır, sayıların tamamının görüntülendiği anlamına gelir." )
+localify.Bind( "tr", prefix.."help_tooltip_show",        "Ağırlık aracı kullanılmadığında bile ipucunu gösterir." )
+localify.Bind( "tr", prefix.."help_tooltip_scale",       "HUD çizilirken ipucunun boyutunu ayarlar." )
+localify.Bind( "tr", prefix.."help_tooltip_legacy",      "Garry's Mod'un eski sürümlerinde kullanılan, biraz değiştirilmiş bir ipucunu etkinleştirir." )
+localify.Bind( "tr", prefix.."help_notifs",              "Bir varlığın ağırlığını uygularken, kopyalarken veya sıfırlarken faydalı bildirimleri etkinleştirir." )
+localify.Bind( "tr", prefix.."help_notifs_sound",        "Bir varlığa ağırlık uygulandığında bildirim sesini etkinleştirir." )
+-- HUD Text
+localify.Bind( "tr", prefix.."hud_original",             "Orijinal" )
+localify.Bind( "tr", prefix.."hud_modified",             "Değiştirilmiş" )
+-- Notifications
+localify.Bind( "tr", prefix.."notif_applied",            "Ağırlık uygulandı" )
+localify.Bind( "tr", prefix.."notif_copied",             "Ağırlık kopyalandı" )
+localify.Bind( "tr", prefix.."notif_restored",           "Orijinal ağırlığa geri dönüldü" )
+
+--[[--------------------------------------------------------------------------
+-- Simplified Chinese Localization
+-- Big thanks to Insane Black Rock Shooter (STEAM_0:1:176977754) for these translations!
+--------------------------------------------------------------------------]]--
+
 -- Tool Settings
 localify.Bind( "zh-cn", prefix.."name",                     "重量工具 - 升级版" )
 localify.Bind( "zh-cn", prefix.."desc",                     "此工具可以修改实体的重量" )
@@ -796,7 +853,7 @@ localify.Bind( "zh-cn", prefix.."label_weight",             "重量：" )
 localify.Bind( "zh-cn", prefix.."label_decimals",           "小数点：" )
 localify.Bind( "zh-cn", prefix.."label_tooltip_scale",      "提示条大小：" )
 localify.Bind( "zh-cn", prefix.."label_language",           "语言：" )
-localify.Bind( "zh-cn", prefix.."label_credits",            "简体中文翻译 - Insane Black Rock Shooter（STEAM_0:1:176977754）" )
+localify.Bind( "zh-cn", prefix.."label_credits",            "简体中文翻译 - Insane Black Rock Shooter （STEAM_0:1:176977754）" )
 -- Checkboxes
 localify.Bind( "zh-cn", prefix.."checkbox_round",           "提示条上显示四舍五入后的重量" )
 localify.Bind( "zh-cn", prefix.."checkbox_tooltip_show",    "总是显示提示条" )
