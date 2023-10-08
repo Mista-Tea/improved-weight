@@ -18,6 +18,7 @@ localify.Bind( "fr",    prefix.."language_fr",    "Français" )
 localify.Bind( "et",    prefix.."language_et",    "Eesti" )
 localify.Bind( "th",    prefix.."language_th",    "ไทย" )
 localify.Bind( "tr",    prefix.."language_tr",    "Türkçe" )
+localify.Bind( "zh-cn", prefix.."language_zh-cn", "简体中文" )
 
 --[[--------------------------------------------------------------------------
 -- English Localization
@@ -830,6 +831,57 @@ localify.Bind( "tr", prefix.."hud_modified",             "Değiştirilmiş" )
 localify.Bind( "tr", prefix.."notif_applied",            "Ağırlık uygulandı" )
 localify.Bind( "tr", prefix.."notif_copied",             "Ağırlık kopyalandı" )
 localify.Bind( "tr", prefix.."notif_restored",           "Orijinal ağırlığa geri dönüldü" )
+
+--[[--------------------------------------------------------------------------
+-- Simplified Chinese Localization
+-- Big thanks to Insane Black Rock Shooter (STEAM_0:1:176977754) for these translations!
+--------------------------------------------------------------------------]]--
+
+-- Tool Settings
+localify.Bind( "zh-cn", prefix.."name",                     "重量工具 - 升级版" )
+localify.Bind( "zh-cn", prefix.."desc",                     "此工具可以修改实体的重量" )
+localify.Bind( "zh-cn", prefix.."left",                     "应用重量" )
+localify.Bind( "zh-cn", prefix.."right",                    "复制重量" )
+localify.Bind( "zh-cn", prefix.."reload",                   "重置重量" )
+-- Errors
+localify.Bind( "zh-cn", prefix.."error_zero_weight",        "你必须输入比 0 大的数值" )
+localify.Bind( "zh-cn", prefix.."error_invalid_phys",       "此实体无有效的碰撞实体（无法修改重量）" )
+localify.Bind( "zh-cn", prefix.."error_max_weight",         "重量不可超出上限" )
+-- Labels
+localify.Bind( "zh-cn", prefix.."label_colorscale",         "颜色变化：" )
+localify.Bind( "zh-cn", prefix.."label_weight",             "重量：" )
+localify.Bind( "zh-cn", prefix.."label_decimals",           "小数点：" )
+localify.Bind( "zh-cn", prefix.."label_tooltip_scale",      "提示条大小：" )
+localify.Bind( "zh-cn", prefix.."label_language",           "语言：" )
+localify.Bind( "zh-cn", prefix.."label_credits",            "简体中文翻译 - Insane Black Rock Shooter （STEAM_0:1:176977754）" )
+-- Checkboxes
+localify.Bind( "zh-cn", prefix.."checkbox_round",           "提示条上显示四舍五入后的重量" )
+localify.Bind( "zh-cn", prefix.."checkbox_tooltip_show",    "总是显示提示条" )
+localify.Bind( "zh-cn", prefix.."checkbox_tooltip_legacy",  "使用原版提示条" )
+localify.Bind( "zh-cn", prefix.."checkbox_notifs",          "显示提示信息" )
+localify.Bind( "zh-cn", prefix.."checkbox_notifs_sound",    "播放提示音效" )
+-- Comboboxes
+localify.Bind( "zh-cn", prefix.."combobox_green_to_red",    "绿色到红色" )
+localify.Bind( "zh-cn", prefix.."combobox_green_to_yellow", "绿色到黄色" )
+localify.Bind( "zh-cn", prefix.."combobox_green_to_blue",   "绿色到蓝色" )
+localify.Bind( "zh-cn", prefix.."combobox_blue_to_red",     "蓝色到红色" )
+localify.Bind( "zh-cn", prefix.."combobox_none",            "无" )
+localify.Bind( "zh-cn", prefix.."combobox_default",         "默认" )
+-- Descriptions
+localify.Bind( "zh-cn", prefix.."help_colorscale",          "在目标实体周围添加一个光圈，其颜色代表其当前重量。颜色分别从最小值到最大值渐变。" )
+localify.Bind( "zh-cn", prefix.."help_decimals",            "指定在 HUD 上显示重量时，重量应保留的小数位数。零表示保留到整数。" )
+localify.Bind( "zh-cn", prefix.."help_tooltip_show",        "即使玩家未在使用重量工具，也会显示提示条。" )
+localify.Bind( "zh-cn", prefix.."help_tooltip_scale",       "设置 HUD 上显示的提示条大小。" )
+localify.Bind( "zh-cn", prefix.."help_tooltip_legacy",      "启用旧版 Garry's Mod 中略微改进过的提示条。" )
+localify.Bind( "zh-cn", prefix.."help_notifs",              "启用对实体应用重量，复制重量或者重置重量时的提示信息。" )
+localify.Bind( "zh-cn", prefix.."help_notifs_sound",        "启用对实体应用重量时提示信息的音效。" )
+-- HUD Text
+localify.Bind( "zh-cn", prefix.."hud_original",             "原重量" )
+localify.Bind( "zh-cn", prefix.."hud_modified",             "修改重量" )
+-- Notifications
+localify.Bind( "zh-cn", prefix.."notif_applied",            "已应用重量" )
+localify.Bind( "zh-cn", prefix.."notif_copied",             "已复制重量" )
+localify.Bind( "zh-cn", prefix.."notif_restored",           "已恢复原重量" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
