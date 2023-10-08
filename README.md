@@ -20,6 +20,7 @@
 	- Feb 11th, 2019 :: Added Estonian translation
 	- Feb 21st, 2019 :: Added Thai translation
 	- Oct  7th, 2023 :: Added Turkish translation
+	- Oct  7th, 2023 :: Added Simplified Chinese translation
 
 ### Fixes:
 	- Fixed unpooled net message error.
@@ -51,3 +52,4 @@
 	- Supports Estonian <et> (credits: [EE] Jamairis McWay [STEAM_0:1:168225547])
 	- Supports Thai <th> (credits: [ATA] Combine Empire Reich [STEAM_0:1:77082118])
 	- Supports Turkish <tr> (credits: Matt [STEAM_0:1:241718138])
+	- Supports Simplified Chinese <zh-cn> (credits: Insane Black Rock Shooter [STEAM_0:1:176977754])
