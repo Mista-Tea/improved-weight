@@ -13,6 +13,7 @@ localify.Bind( "es",    prefix.."language_es",    "Español" )
 localify.Bind( "da",    prefix.."language_da",    "Dansk" )
 localify.Bind( "bg",    prefix.."language_bg",    "Български" )
 localify.Bind( "ru",    prefix.."language_ru",    "русский" )
+localify.Bind( "tr",    prefix.."language_tr",    "Türkçe" )
 localify.Bind( "ko",    prefix.."language_ko",    "한국어" )
 localify.Bind( "fr",    prefix.."language_fr",    "Français" )
 localify.Bind( "et",    prefix.."language_et",    "Eesti" )
@@ -778,6 +779,56 @@ localify.Bind( "th", prefix.."hud_modified",             "ดัดแปลง"
 localify.Bind( "th", prefix.."notif_applied",            "น้ำหนักประยุกต์" )
 localify.Bind( "th", prefix.."notif_copied",             "คัดลอกน้ำหนักแล้ว" )
 localify.Bind( "th", prefix.."notif_restored",           "เรียกคืนน้ำหนักดั้งเดิม" )
+
+--[[--------------------------------------------------------------------------
+-- Turkish Localization
+--------------------------------------------------------------------------]]--
+
+-- Alet Ayarları
+localify.Bind( "tr", prefix.."name",                     "Geliştirilmiş Ağırlık" )
+localify.Bind( "tr", prefix.."desc",                     "Varlığın ağırlığını değiştirir" )
+localify.Bind( "tr", prefix.."left",                     "Ağırlığı uygula" )
+localify.Bind( "tr", prefix.."right",                    "Ağırlığı kopyala" )
+localify.Bind( "tr", prefix.."reload",                   "Ağırlığı sıfırla" )
+-- Hatalar
+localify.Bind( "tr", prefix.."error_zero_weight",        "0'dan büyük bir ağırlık uygulamanız gerekir" )
+localify.Bind( "tr", prefix.."error_invalid_phys",       "Bu varlığın geçerli bir fizik nesnesi yok (ağırlık değiştirilemez)" )
+localify.Bind( "tr", prefix.."error_max_weight",         "Maksimum ağırlığı geçemez" )
+-- Etiketler
+localify.Bind( "tr", prefix.."label_colorscale",         "Renk Ölçeği: " )
+localify.Bind( "tr", prefix.."label_weight",             "Ağırlık: " )
+localify.Bind( "tr", prefix.."label_decimals",           "Ondalık: " )
+localify.Bind( "tr", prefix.."label_tooltip_scale",      "İpucu Ölçeği: " )
+localify.Bind( "tr", prefix.."label_language",           "Dil: Türkçe" )
+localify.Bind( "tr", prefix.."label_credits",            "Türkçeye Matt tarafından çevrilmiştir (STEAM_0:1:241718138)" )
+-- Onay kutuları
+localify.Bind( "tr", prefix.."checkbox_round",           "Yuvarlanmış ağırlıkları ipucunda göster" )
+localify.Bind( "tr", prefix.."checkbox_tooltip_show",    "Her zaman ipuçlarını göster" )
+localify.Bind( "tr", prefix.."checkbox_tooltip_legacy",  "Eski ipuçlarını kullan" )
+localify.Bind( "tr", prefix.."checkbox_notifs",          "Bildirimleri göster" )
+localify.Bind( "tr", prefix.."checkbox_notifs_sound",    "Bildirim sesleri çal" )
+-- Açılan Kutular
+localify.Bind( "tr", prefix.."combobox_green_to_red",    "Yeşilden Kırmızıya" )
+localify.Bind( "tr", prefix.."combobox_green_to_yellow", "Yeşilden Sarıya" )
+localify.Bind( "tr", prefix.."combobox_green_to_blue",   "Yeşilden Maviye" )
+localify.Bind( "tr", prefix.."combobox_blue_to_red",     "Maviden Kırmızıya" )
+localify.Bind( "tr", prefix.."combobox_none",            "Hiçbiri" )
+localify.Bind( "tr", prefix.."combobox_default",         "Varsayılan" )
+-- Açıklamalar
+localify.Bind( "tr", prefix.."help_colorscale",          "Hedef varlığa, mevcut ağırlığını temsil eden bir renkle bir ışık halkası ekler. Renkler sırasıyla minimumdan maksimuma doğru gider." )
+localify.Bind( "tr", prefix.."help_decimals",            "Ağırlıkların HUD'da görüntülenirken kaç ondalık basamağa yuvarlanması gerektiğini belirler. Sıfır, sayıların tamamının görüntülendiği anlamına gelir." )
+localify.Bind( "tr", prefix.."help_tooltip_show",        "Ağırlık aracı kullanılmadığında bile ipucunu gösterir." )
+localify.Bind( "tr", prefix.."help_tooltip_scale",       "HUD çizilirken ipucunun boyutunu ayarlar." )
+localify.Bind( "tr", prefix.."help_tooltip_legacy",      "Garry's Mod'un eski sürümlerinde kullanılan, biraz değiştirilmiş bir ipucunu etkinleştirir." )
+localify.Bind( "tr", prefix.."help_notifs",              "Bir varlığın ağırlığını uygularken, kopyalarken veya sıfırlarken faydalı bildirimleri etkinleştirir." )
+localify.Bind( "tr", prefix.."help_notifs_sound",        "Bir varlığa ağırlık uygulandığında bildirim sesini etkinleştirir." )
+-- Arayüz Metni
+localify.Bind( "tr", prefix.."hud_original",             "Orijinal" )
+localify.Bind( "tr", prefix.."hud_modified",             "Değiştirilmiş" )
+-- Bildirimler
+localify.Bind( "tr", prefix.."notif_applied",            "Ağırlık uygulandı" )
+localify.Bind( "tr", prefix.."notif_copied",             "Ağırlık kopyalandı" )
+localify.Bind( "tr", prefix.."notif_restored",           "Orijinal ağırlığa geri dönüldü" )
 
 --[[--------------------------------------------------------------------------
 -- <Other> Localization
