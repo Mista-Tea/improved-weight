@@ -53,3 +53,4 @@
 	- Supports Thai <th> (credits: [ATA] Combine Empire Reich [STEAM_0:1:77082118])
 	- Supports Turkish <tr> (credits: Matt [STEAM_0:1:241718138])
 	- Supports Simplified Chinese <zh-cn> (credits: Insane Black Rock Shooter [STEAM_0:1:176977754])
+	- Supports Traditional Chinese <zh-tw> (credits: SheepYhangCN [STEAM_0:0:448359534] based on Simplified Chinese)
