@@ -1,50 +1,8 @@
---[[--------------------------------------------------------------------------
-	Improved Weight Tool
-	
-	File name:
-		weight_improved.lua
-		
-	Authors:
-		- Original            :: Spoco     (STEAM_0:1:289018) 
-		- Updated for GMod 13 :: Marii     (STEAM_0:1:16015332)
-		- Rewritten           :: Mista Tea (STEAM_0:0:27507323)
-		
-	Changelog:
-		- Dec 28th, 2015 :: Added to GitHub
-		- Dec 28th, 2015 :: Added to Workshop
-		- Dec 29th, 2015 :: Added German support
-		- Jan  1st, 2016 :: Added Spanish support
-		- Jan  8th, 2016 :: Language switching improvements
-		- Jan 13th, 2016 :: Notification bug fix for DarkRP
-		- Apr 17th, 2016 :: Added Danish support
-		- May 21st, 2016 :: Added Bulgarian support
-		- Nov 12th, 2016 :: Added Russian support
-		- Jan  9th, 2017 :: Added Korean support
-		- Jan 10th, 2017 :: Added French support
-		- Feb 11th, 2019 :: Added Estonian support
-		- Feb 21st, 2019 :: Added Thai support
-----------------------------------------------------------------------------]]
+if SERVER then
+    AddCSLuaFile( "improvedweight/improvedweight.lua" )
+    include( "improvedweight/improvedweight.lua" )
+end
 
-local mode = TOOL.Mode -- defined by the name of this file (default should be weight_improved)
-
---[[--------------------------------------------------------------------------
--- Modules & Dependencies
---------------------------------------------------------------------------]]--
-
-include( "improvedweight/localify.lua" )                     -- needed for localization support (depends on GMod locale: "gmod_language")
-localify.LoadSharedFile( "improvedweight/localization.lua" ) -- loads the file containing localized phrases
-local L = localify.Localize                                  -- used for translating string tokens into localized phrases
-local prefix = "#tool."..mode.."."                           -- prefix used for this tool's localization tokens
-
--- needed for weight setting/copying/restoring functionality
-include( "improvedweight/improvedweight.lua" )
-
---[[--------------------------------------------------------------------------
--- Localized Functions & Variables
---------------------------------------------------------------------------]]--
-
--- localizing global functions/tables is an encouraged practice that improves code efficiency,
--- since accessing a local value is considerably faster than a global value
 local net = net
 local util = util
 local hook = hook
@@ -67,593 +25,417 @@ local NOTIFY_GENERIC = NOTIFY_GENERIC or 0
 local NOTIFY_ERROR   = NOTIFY_ERROR   or 1
 local NOTIFY_CLEANUP = NOTIFY_CLEANUP or 4
 
-local MIN_WEIGHT      = 0.01      -- the minimum mass that can be set on a physics object (do not change, entities with 0 mass change to 45,678 mass when physgunned)
-local MAX_WEIGHT      = 50000     -- the maximum mass that can be set on a physics object (do not change, this is hardcoded by GMod/Source)
-local MIN_NOTIFY_BITS = 3         -- the minimum number of bits needed to send a NOTIFY enum
-local NOTIFY_DURATION = 5         -- the number of seconds to display notifications
-local MISSING_WEIGHT  = -1234.5   -- the number representing an invalid (not-set) weight, used as default when retrieving networked weights
+local MIN_WEIGHT      = 0.01
+local MAX_WEIGHT      = 50000
+local MIN_NOTIFY_BITS = 3
+local NOTIFY_DURATION = 5
+local MISSING_WEIGHT  = -1234.5
 
 local weightLabels = {
-	original = L(prefix.."hud_original"),
-	modified = L(prefix.."hud_modified")
+    original = "Original",
+    modified = "Modified"
 }
-
---[[--------------------------------------------------------------------------
--- Tool Settings
---------------------------------------------------------------------------]]--
 
 TOOL.Category = "Construction"
-TOOL.Name     = L(prefix.."name")
-
+TOOL.Name     = "Weight - Improved"
 TOOL.Information = {
-	"left",
-	"right",
-	"reload"
+    "left",
+    "right",
+    "reload"
 }
 
-TOOL.ClientConVar[ "mass" ]            = "1"
-TOOL.ClientConVar[ "tooltip_show" ]    = "0"
-TOOL.ClientConVar[ "tooltip_legacy" ]  = "0"
-TOOL.ClientConVar[ "tooltip_scale" ]   = "24"
-TOOL.ClientConVar[ "colorscale" ]      = "1"
-TOOL.ClientConVar[ "rounded" ]         = "1"
-TOOL.ClientConVar[ "decimals" ]        = "2"
-TOOL.ClientConVar[ "notifs"]           = "1"
-TOOL.ClientConVar[ "notifs_sound" ]    = "1"
+TOOL.ClientConVar["mass"] = "1"
+TOOL.ClientConVar["tooltip_show"] = "0"
+TOOL.ClientConVar["tooltip_legacy"] = "0"
+TOOL.ClientConVar["tooltip_scale"] = "24"
+TOOL.ClientConVar["colorscale"] = "1"
+TOOL.ClientConVar["rounded"] = "1"
+TOOL.ClientConVar["decimals"] = "2"
+TOOL.ClientConVar["notifs"] = "1"
+TOOL.ClientConVar["notifs_sound"] = "1"
 
---[[--------------------------------------------------------------------------
--- Convenience Functions
---------------------------------------------------------------------------]]--
-
-function TOOL:GetMass()                return self:GetClientNumber( "mass" )                end
+function TOOL:GetMass()                return self:GetClientNumber( "mass" ) end
 function TOOL:ShouldUseLegacyTooltip() return self:GetClientNumber( "tooltip_legacy" ) == 1 end
-function TOOL:GetTooltipScale()        return self:GetClientNumber( "tooltip_scale" )       end
-function TOOL:ShouldSendNotification() return self:GetClientNumber( "notifs" ) == 1         end
+function TOOL:GetTooltipScale()        return self:GetClientNumber( "tooltip_scale" ) end
+function TOOL:ShouldSendNotification() return self:GetClientNumber( "notifs" ) == 1 end
 
-if ( CLIENT ) then
-	
-	--[[--------------------------------------------------------------------------
-	-- Language Settings
-	--------------------------------------------------------------------------]]--
-	
-	language.Add( "tool."..mode..".name",   L(prefix.."name") )
-	language.Add( "tool."..mode..".desc",   L(prefix.."desc") )
-	language.Add( "tool."..mode..".left",   L(prefix.."left") )
-	language.Add( "tool."..mode..".right",  L(prefix.."right") )
-	language.Add( "tool."..mode..".reload", L(prefix.."reload") )
-	
-	--[[--------------------------------------------------------------------------
-	-- Net Messages
-	--------------------------------------------------------------------------]]--
-	
-	--[[--------------------------------------------------------------------------
-	-- 	Net :: <toolmode>_notif( string )
-	--]]--
-	net.Receive( mode.."_notif", function( bytes )
-		notification.AddLegacy( net.ReadString(), net.ReadUInt(MIN_NOTIFY_BITS), NOTIFY_DURATION )
-		local sound = net.ReadString()
-		if ( sound ~= "" and GetConVarNumber( mode.."_notifs_sound" ) == 1 ) then surface.PlaySound( sound ) end
-	end )
-	
-	--[[--------------------------------------------------------------------------
-	-- 	Net :: <toolmode>_error( string )
-	--]]--
-	net.Receive( mode.."_error", function( bytes )
-		surface.PlaySound( "buttons/button10.wav" )
-		notification.AddLegacy( net.ReadString(), net.ReadUInt(MIN_NOTIFY_BITS), NOTIFY_DURATION )
-	end )
-	
-	--[[--------------------------------------------------------------------------
-	-- CVars
-	--------------------------------------------------------------------------]]--
-	
-	-- get the cvars if they're valid (e.g., editing and auto-refreshing this file).
-	-- otherwise they won't be valid yet when first ran and we have to wait until
-	-- TOOL:Init() gets called (below) to set them up
-	local cvarTool       = GetConVar( "gmod_toolmode" )
-	local cvarTooltip    = GetConVar( mode.."_tooltip_show" )
-	local cvarLegacy     = GetConVar( mode.."_tooltip_legacy" )
-	local cvarRounded    = GetConVar( mode.."_rounded" )
-	local cvarDecimals   = GetConVar( mode.."_decimals" )
-	local cvarColorScale = GetConVar( mode.."_colorscale" )
-	
-	-- additional check to ensure hooks don't run unless the tool has initialized
-	local initialized = false
-	
-	-- we're creating a bunch of local functions here using the cvars above so that we don't have to
-	-- rely on the TOOL object (which can be problematic when trying to use it inside a hook).
-	-- these should be pretty much identical to the TOOL functions created near the top of this file
-	local function shouldRound()            return cvarRounded:GetBool()   end
-	local function shouldDrawTooltip()      return cvarTooltip:GetBool()   end
-	local function shouldUseLegacyTooltip() return cvarLegacy:GetBool()    end
-	local function getDecimals()            return cvarDecimals:GetInt()   end
-	local function getColorScale()          return cvarColorScale:GetInt() end
-	
-	function TOOL:Init()
-		-- setup the fonts we'll be using when drawing the HUD
-		surface.CreateFont( mode.."_tooltip",        { font = "coolvetica", size = GetConVarNumber( mode.."_tooltip_scale", 24 ), weight = 500 } )
-		surface.CreateFont( mode.."_tooltip_legacy", { font = "coolvetica", size = 24, weight = 500 } )
-		
-		-- now the convars are truly valid, so reassign the upvalues
-		cvarTool       = GetConVar( "gmod_toolmode" )
-		cvarTooltip    = GetConVar( mode.."_tooltip_show" )
-		cvarLegacy     = GetConVar( mode.."_tooltip_legacy" )
-		cvarRounded    = GetConVar( mode.."_rounded" )
-		cvarDecimals   = GetConVar( mode.."_decimals" )
-		cvarColorScale = GetConVar( mode.."_colorscale" )
-		
-		-- signify that the tool has initialized
-		initialized = true
-	end
-	
-	--[[--------------------------------------------------------------------------
-	-- 	CVar :: <toolmode>_tooltip_scale( string, string, string )
-	--
-	--	Callback function to automatically create a new font with the given scale size.
-	--	This method is a bit excessive if the player changes the scale thousands of times,
-	--	but otherwise shouldn't be an issue.
-	--]]--
-	cvars.AddChangeCallback( mode.."_tooltip_scale", function( name, old, new )
-		new = tonumber( new )
-		if ( not new ) then return false end
-		
-		surface.CreateFont( mode.."_tooltip", {
-			font = "coolvetica",
-			size = (new > 0 and new or 1),
-			weight = 500,
-		})
-	end, mode )
-	
-	
-	--[[--------------------------------------------------------------------------
-	-- 	LerpColor( number, color, color )
-	--
-	--	Returns the linear interpolation (lerp) between the given colors.
-	--]]--
-	local function LerpColor( frac, c1, c2 )
-		return Color( 
-			Lerp( frac, c1.r, c2.r ),
-			Lerp( frac, c1.g, c2.g ),
-			Lerp( frac, c1.b, c2.b )
-		)
-	end
-	
-	--[[--------------------------------------------------------------------------
-	-- 	ComplexText( string, table, table, number, number, number, number, function, color )
-	--
-	--	Draws a complex line of text on the screen, allowing multiple colors and a callback 
-	--	function to paint things behind it or change the x,y coordinates.
-	--]]--
-	local function ComplexText( font, textTbl, colorTbl, x, y, alignX, alignY, callback, defaultColor )
-		surface.SetFont( font )
-		local w, h = 0, 0
-		local str = ""
-		
-		for i, text in pairs( textTbl ) do
-			str = str .. text
-			w, h = surface.GetTextSize( str )
-		end
-		
-		x, y = callback( x, y, w, h ) or x, y
-		
-		w, h = 0, 0
-		str = ""
-		
-		for i, text in pairs( textTbl ) do
-			draw.SimpleText( text, font, x + w, y, colorTbl[i] or defaultColor or color_white, alignX, alignY )
-			
-			str = str .. text
-			w, h = surface.GetTextSize( str )
-		end
-		
-		return w, h
-	end
-	
-	--[[--------------------------------------------------------------------------
-	-- Localized Variables
-	--------------------------------------------------------------------------]]--
-	
-	-- colors to use when drawing the HUD
-	local COLOR_TRANSPARENT = Color( 0, 0, 0, 200 )
-	local COLOR_YELLOW      = Color( 250, 250, 200, 255 )
-	local COLOR_BLUE        = Color( 100, 150, 255 )
-	
-	local text   = "Loading"
-	local bgcol  = COLOR_TRANSPARENT
-	local txcol  = color_white
-	local font   = mode.."_tooltip"	
-	local rad    = 0
-	local tw, th
-	
-	-- defines the colors to linearly interpolate between (used by the <toolmode>_colorscale cvar
-	local colorscales = {
-		[1] = { Min = Color(0,255,0),    Max = Color(255,0,0)   }, -- green to red
-		[2] = { Min = Color(0,255,0),    Max = Color(255,255,0) }, -- green to yellow
-		[3] = { Min = Color(0,255,0),    Max = Color(50,100,255)}, -- green to blue
-		[4] = { Min = Color(50,100,255), Max = Color(255,0,0)   }, -- blue  to red
-	}
-	
-	--[[--------------------------------------------------------------------------
-	-- 	DrawHUD (Hook :: HUDPaint)
-	--
-	--	Draws the tooltip onto the client's screen whenever they have the improved weight tool selected.
-	--]]--
-	local function DrawHUD()
-		-- don't do any processing unless the tool has fully initialized
-		if ( not initialized ) then return end
-		
-		local ply = LocalPlayer()
-		if ( not IsValid( ply ) ) then return end
-		
-		-- if they aren't forcing the tooltip to always show, check if they have the toolgun out and have weight selected
-		local wep = ply:GetActiveWeapon()
-		if ( not shouldDrawTooltip() and (not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or cvarTool:GetString() ~= mode) ) then return end
-		
-		local tr  = ply:GetEyeTrace()
-		local ent = tr.Entity
-	
-		if ( not IsValid( ent ) ) then return end
-		if ( ent:IsPlayer() )     then return end
-	
-		local useRounding = shouldRound()
-		local decimals    = getDecimals()
-		
-		-- retrieves the networked weight values that were set on the entity from the server
-		local oriWeight = improvedweight.GetOriginalWeight( ent, MISSING_WEIGHT ) 
-		local modWeight = improvedweight.GetModifiedWeight( ent, MISSING_WEIGHT ) 
-		
-		-- makes the weights nil if the entity is missing a physics object (can't use nil as a fallback value with GetNWFloat)
-		if ( oriWeight == MISSING_WEIGHT ) then oriWeight = nil end
-		if ( modWeight == MISSING_WEIGHT ) then modWeight = nil end
-		
-		-- rounds the weights if the client has rounding enabled
-		oriWeight = (useRounding and oriWeight and math.Round( oriWeight, decimals )) or oriWeight
-		modWeight = (useRounding and modWeight and math.Round( modWeight, decimals )) or modWeight
-		
-		-- creates a string representation of the weight with commas inserted (N/A on entities without weights)
-		local oriWeightStr = string.Comma( oriWeight or "N/A" )
-		local modWeightStr = string.Comma( modWeight or "N/A" )
-		
-		-- gets the vector position of the center of the entity and translates it to x/y coordinates on the client's screen
-		local pos = (ent:GetPos() + ent:OBBCenter()):ToScreen()
-		local x, y = pos.x, pos.y
-		
-		local useLegacy = shouldUseLegacyTooltip()
-		
-		-- Use the legacy tooltip style, though slightly modified to ditch the need for cam.3D2D()
-		if ( useLegacy ) then
-			bgcol = COLOR_YELLOW
-			txcol = color_black
-			font  = mode.."_tooltip_legacy"
-			rad   = 8
-			
-			text = ("%s: %s | %s: %s"):format( weightLabels.original, oriWeightStr, weightLabels.modified, modWeightStr )
-			
-			surface.SetFont( font )
-			local tw, th = surface.GetTextSize( text )
-			
-			draw.RoundedBox( rad, x - tw/2 - 12, y - th/2 - 4, tw + 24, th + 8, COLOR_TRANSPARENT ) -- dark outline
-			draw.RoundedBox( rad, x - tw/2 - 10, y - th/2 - 2, tw + 20, th + 4, bgcol )             -- yellow background
-			draw.SimpleText( text, font, x, y, txcol, 1, 1 )
-		else
-		-- Draw the new tooltip which utilizes colored text for better readability
-			bgcol = COLOR_TRANSPARENT
-			txcol = color_white
-			font  = mode.."_tooltip"
-			rad   = 0
-			
-			-- gets the client's colorscale setting for Lerp'ing the halo/label color
-			local colormode  = getColorScale()
-			local colorscale = colorscales[ colormode ]
-			local color      = colorscale and colorscale.Min or color_white
-			
-			-- check to see if the user has a color scale selected before adding a halo to the entity
-			if ( colorscale ) then
-				local frac = (modWeight or 0) / MAX_WEIGHT
-				color = LerpColor( frac, colorscale.Min, colorscale.Max )
-				
-				-- draws the halo around the trace entity (using either the Lerp'd colorscale or white)
-				halo.Add( {ent}, color )
-			end
-			
-			-- calculates the weight multiplier (how many times larger/smaller the modified weight is compared to the original weight)
-			local mult = math.Round( (modWeight or 1) / (oriWeight or 1), useRounding and decimals or 2 )
-			
-			-- draws the multicolored tooltip on the client's screen
-			ComplexText( font,
-				{ weightLabels.original..": ", oriWeightStr, "  |  "..weightLabels.modified..": ", modWeightStr, " ("..mult.."x)" }, 
-				{ textcol, COLOR_BLUE, textcol, COLOR_BLUE, color }, pos.x, pos.y, 0, 0,
-				function( x, y, w, h )
-					x = x - w/2
-					draw.RoundedBox( rad, x-10, y-5, w+20, h+10, bgcol )
-					draw.RoundedBox( rad, x-8,  y-3, w+16, h+6,  bgcol )
-					return x, y
-				end
-			)
-		end
-	end
-	hook.Add( "HUDPaint", mode.."_hud", DrawHUD )
-	
-	--[[--------------------------------------------------------------------------
-	--
-	-- 	TOOL.BuildCPanel( panel )
-	--
-	--]]--
-	local function buildCPanel( cpanel )
-		-- quick presets for default settings
-		local presets = { 
-			Label      = "Presets",
-			MenuButton = 1,
-			Folder     = "weight",
-			Options = {
-				[L(prefix.."combobox_default")] = {
-					[mode.."_colorscale"]     = "1",
-					[mode.."_decimals"]       = "2",
-					[mode.."_mass"]           = "1",
-					[mode.."_notifs"]         = "1",
-					[mode.."_notifs_sound"]   = "1",
-					[mode.."_rounded"]        = "1",
-					[mode.."_tooltip_show"]   = "0",
-					[mode.."_tooltip_legacy"] = "0",
-					[mode.."_tooltip_scale"]  = "24",
-				},
-			},
-			CVars = { 
-				mode.."_colorscale",
-				mode.."_decimals",
-				mode.."_mass",
-				mode.."_notifs",
-				mode.."_notifs_sound",
-				mode.."_rounded",
-				mode.."_tooltip_show",
-				mode.."_tooltip_legacy",
-				mode.."_tooltip_scale",
-			}
-		}
+if CLIENT then
+    language.Add( "tool.weight_improved.name",   "Weight - Improved" )
+    language.Add( "tool.weight_improved.desc",   "Modifies the weight of an entity" )
+    language.Add( "tool.weight_improved.left",   "Apply weight" )
+    language.Add( "tool.weight_improved.right",  "Copy weight" )
+    language.Add( "tool.weight_improved.reload", "Reset weight" )
 
-		-- enumerations for colorscales to use when drawing the HUD
-		local colors = {
-			Label = L(prefix.."label_colorscale"),
-			MenuButton = 0,
-			Options = {
-				[L(prefix.."combobox_green_to_red")]    = { [mode.."_colorscale"] = 1 },
-				[L(prefix.."combobox_green_to_yellow")] = { [mode.."_colorscale"] = 2 },
-				[L(prefix.."combobox_green_to_blue")]   = { [mode.."_colorscale"] = 3 },
-				[L(prefix.."combobox_blue_to_red")]     = { [mode.."_colorscale"] = 4 },
-				[L(prefix.."combobox_none")]            = { [mode.."_colorscale"] = 0 }
-			}
-		}
+    net.Receive( "weight_improved_notif", function( bytes )
+        notification.AddLegacy( net.ReadString(), net.ReadUInt(MIN_NOTIFY_BITS), NOTIFY_DURATION )
+        local sound = net.ReadString()
+        if ( sound ~= "" and GetConVarNumber( "weight_improved_notifs_sound" ) == 1 ) then surface.PlaySound( sound ) end
+    end )
 
-		-- populate the table of valid languages that clients can switch between
-		local languageOptions = {}
+    net.Receive( "weight_improved_error", function()
+        surface.PlaySound( "buttons/button10.wav" )
+        notification.AddLegacy( net.ReadString(), net.ReadUInt( MIN_NOTIFY_BITS ), NOTIFY_DURATION )
+    end )
 
-		for code, tbl in pairs( localify.GetLocalizations() ) do
-			if ( not L(prefix.."language_"..code, code) ) then continue end
+    local cvarTool       = GetConVar( "gmod_toolmode" )
+    local cvarTooltip    = GetConVar( "weight_improved_tooltip_show" )
+    local cvarLegacy     = GetConVar( "weight_improved_tooltip_legacy" )
+    local cvarRounded    = GetConVar( "weight_improved_rounded" )
+    local cvarDecimals   = GetConVar( "weight_improved_decimals" )
+    local cvarColorScale = GetConVar( "weight_improved_colorscale" )
 
-			languageOptions[ L(prefix.."language_"..code, code) ] = { localify_language = code }
-		end
+    local function shouldRound()            return cvarRounded:GetBool()   end
+    local function shouldDrawTooltip()      return cvarTooltip:GetBool()   end
+    local function shouldUseLegacyTooltip() return cvarLegacy:GetBool()    end
+    local function getDecimals()            return cvarDecimals:GetInt()   end
+    local function getColorScale()          return cvarColorScale:GetInt() end
 
-		local languages = {
-			Label      = L(prefix.."label_language"),
-			MenuButton = 0,
-			Options    = languageOptions,
-		}
+    function TOOL:Init()
+        surface.CreateFont( "weight_improved_tooltip",        { font = "coolvetica", size = GetConVarNumber( "weight_improved_tooltip_scale", 24 ), weight = 500 } )
+        surface.CreateFont( "weight_improved_tooltip_legacy", { font = "coolvetica", size = 24, weight = 500 } )
 
-		cpanel:AddControl( "ComboBox", languages )
-		cpanel:ControlHelp( "\n" .. L(prefix.."label_credits") )
-		cpanel:AddControl( "Label",    { Text = L(prefix.."desc") } )
-		cpanel:AddControl( "ComboBox", presets )
-		cpanel:ControlHelp( "" )
-		cpanel:AddControl( "Slider",   { Label = L(prefix.."label_weight"),         Command = mode.."_mass", Type = "Float", Min = "0.01", Max = MAX_WEIGHT } )
-		cpanel:ControlHelp( "" )
-		cpanel:AddControl( "ComboBox", colors )
-		cpanel:ControlHelp( "" )
-		cpanel:ControlHelp( L(prefix.."help_colorscale") .. "\n" )
-		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_round"),          Command = mode.."_rounded" } )
-		cpanel:AddControl( "Slider",   { Label = L(prefix.."label_decimals"),          Command = mode.."_decimals", Type = "Numeric", Min = "0", Max = "8" } )
-		cpanel:ControlHelp( L(prefix.."help_decimals") .. "\n" )
-		cpanel:AddControl( "Slider",   { Label = L(prefix.."label_tooltip_scale"),     Command = mode.."_tooltip_scale", Type = "Numeric", Min = "1", Max = "128" } )
-		cpanel:ControlHelp( L(prefix.."help_tooltip_scale") .. "\n" )
-		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_show"),   Command = mode.."_tooltip_show" } )
-		cpanel:ControlHelp( L(prefix.."help_tooltip_show") )
-		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_tooltip_legacy"), Command = mode.."_tooltip_legacy" } )
-		cpanel:ControlHelp( L(prefix.."help_tooltip_legacy") )
-		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs"),         Command = mode.."_notifs" } )
-		cpanel:ControlHelp( L(prefix.."help_notifs") )
-		cpanel:AddControl( "Checkbox", { Label = L(prefix.."checkbox_notifs_sound"),   Command = mode.."_notifs_sound" } )
-		cpanel:ControlHelp( L(prefix.."help_notifs_sound") .. "\n" )
-	end
+        cvarTool       = GetConVar( "gmod_toolmode" )
+        cvarTooltip    = GetConVar( "weight_improved_tooltip_show" )
+        cvarLegacy     = GetConVar( "weight_improved_tooltip_legacy" )
+        cvarRounded    = GetConVar( "weight_improved_rounded" )
+        cvarDecimals   = GetConVar( "weight_improved_decimals" )
+        cvarColorScale = GetConVar( "weight_improved_colorscale" )
 
-	-- listen for changes to the localify language and reload the tool's menu to update the localizations
-	cvars.AddChangeCallback( "localify_language", function( name, old, new )
-		weightLabels.original = L(prefix.."hud_original")
-		weightLabels.modified = L(prefix.."hud_modified")
+        initialized = true
+    end
 
-		local cpanel = controlpanel.Get( mode )
-		if ( not IsValid( cpanel ) ) then return end
-		cpanel:ClearControls()
-		buildCPanel( cpanel )
-	end, "improvedweight" )
+    cvars.AddChangeCallback( "weight_improved_tooltip_scale", function( _, _, new )
+        new = tonumber( new )
+        if ( not new ) then return false end
 
-	TOOL.BuildCPanel = buildCPanel
-	
-elseif ( SERVER ) then
-	
-	util.AddNetworkString( mode.."_notif" )
-	util.AddNetworkString( mode.."_error" )
-	
-	--[[--------------------------------------------------------------------------
-	-- 	TOOL:SendNotif( string )
-	--
-	--	Convenience function for sending a notification to the tool owner.
-	--]]--
-	function TOOL:SendNotif( str, notify, sound )
-		if ( not self:ShouldSendNotification() ) then return end
-		
-		net.Start( mode.."_notif" )
-			net.WriteString( str )
-			net.WriteUInt( notify or NOTIFY_GENERIC, MIN_NOTIFY_BITS )
-			net.WriteString( sound or "" )
-		net.Send( self:GetOwner() )
-	end
-	
-	--[[--------------------------------------------------------------------------
-	--	TOOL:SendError( str )
-	--
-	--	Convenience function for sending an error to the tool owner.
-	--]]--
-	function TOOL:SendError( str )		
-		net.Start( mode.."_error" )
-			net.WriteString( str )
-			net.WriteUInt( notify or NOTIFY_ERROR, MIN_NOTIFY_BITS )
-		net.Send( self:GetOwner() )
-	end
-	
-	--[[--------------------------------------------------------------------------
-	--	Hook :: OnEntityCreated( entity )
-	--
-	--	Attempts to retrieve the entity's mass one frame after it has been spawned.
-	--	Unfortunately, there is no guarantee that the entity's physics object will be
-	--	fully initialized, so the mass may not yet be available.
-	--]]--
-	hook.Add( "OnEntityCreated", mode.."_setup", function( ent )
-		local i = ent:EntIndex()
-		
-		hook.Add( "Tick", mode.."_setup_"..i,function()
-			if ( IsValid( ent ) and IsValid( ent:GetPhysicsObject() ) ) then
-				improvedweight.Setup( ent )
-			end
-			hook.Remove( "Tick", mode.."_setup_"..i )
-		end ) 
-	end )
-	
+        surface.CreateFont( "weight_improved_tooltip", {
+            font = "coolvetica",
+            size = new > 0 and new or 1,
+            weight = 500,
+        } )
+    end, "weight_improved" )
+
+    local function LerpColor( frac, c1, c2 )
+        return Color(
+            Lerp( frac, c1.r, c2.r ),
+            Lerp( frac, c1.g, c2.g ),
+            Lerp( frac, c1.b, c2.b )
+        )
+    end
+
+    local function ComplexText( font, textTbl, colorTbl, x, y, alignX, alignY, callback, defaultColor )
+        surface.SetFont( font )
+        local w, h = 0, 0
+        local str = ""
+
+        for _, text in pairs( textTbl ) do
+            str = str .. text
+            w, h = surface.GetTextSize( str )
+        end
+
+        x, y = callback( x, y, w, h ) or x, y
+
+        w, h = 0, 0
+        str = ""
+
+        for i, text in pairs( textTbl ) do
+            draw.SimpleText( text, font, x + w, y, colorTbl[i] or defaultColor or color_white, alignX, alignY )
+
+            str = str .. text
+            w, h = surface.GetTextSize( str )
+        end
+
+        return w, h
+    end
+
+    local COLOR_TRANSPARENT = Color( 0, 0, 0, 200 )
+    local COLOR_YELLOW = Color( 250, 250, 200, 255 )
+    local COLOR_BLUE = Color( 100, 150, 255 )
+
+    local text = "Loading"
+    local bgcol = COLOR_TRANSPARENT
+    local txcol = color_white
+    local font = "weight_improved_tooltip"
+    local rad = 0
+
+    local colorscales = {
+        [1] = { Min = Color( 0, 255, 0 ),    Max = Color( 255, 0, 0 )   },
+        [2] = { Min = Color( 0, 255, 0 ),    Max = Color( 255, 255, 0 ) },
+        [3] = { Min = Color( 0, 255, 0 ),    Max = Color( 50, 100, 255 )},
+        [4] = { Min = Color( 50, 100, 255 ), Max = Color( 255, 0, 0 )   },
+    }
+
+    local function DrawHUD()
+        local ply = LocalPlayer()
+        if ( not IsValid( ply ) ) then return end
+
+        local wep = ply:GetActiveWeapon()
+        if ( not shouldDrawTooltip() and ( not IsValid( wep ) or wep:GetClass() ~= "gmod_tool" or cvarTool:GetString() ~= "weight_improved" ) ) then return end
+
+        local tr  = ply:GetEyeTrace()
+        local ent = tr.Entity
+
+        if ( not IsValid( ent ) ) then return end
+        if ( ent:IsPlayer() )     then return end
+
+        local useRounding = shouldRound()
+        local decimals = getDecimals()
+        local oriWeight = ent:GetNW2Float( "ImprovedWeight_OriginalWeight", MISSING_WEIGHT )
+        local modWeight = ent:GetNW2Float( "ImprovedWeight_ModifiedWeight", MISSING_WEIGHT )
+
+        local originalWeightMissing = oriWeight == MISSING_WEIGHT
+        local modifiedWeightMissing = modWeight == MISSING_WEIGHT
+        if originalWeightMissing then oriWeight = nil end
+        if modifiedWeightMissing then modWeight = nil end
+
+        if originalWeightMissing and modifiedWeightMissing and ( not ent.weight_improved_requested or CurTime() > ent.weight_improved_requested_time ) then
+            net.Start( "weight_improved_requestweight" )
+            net.WriteEntity( ent )
+            net.SendToServer()
+            ent.weight_improved_requested_time = CurTime() + 3
+        end
+
+        oriWeight = ( useRounding and oriWeight and math.Round( oriWeight, decimals ) ) or oriWeight
+        modWeight = ( useRounding and modWeight and math.Round( modWeight, decimals ) ) or modWeight
+
+        local oriWeightStr = string.Comma( oriWeight or "N/A" )
+        local modWeightStr = string.Comma( modWeight or "N/A" )
+        local pos = ( ent:GetPos() + ent:OBBCenter() ):ToScreen()
+        local x, y = pos.x, pos.y
+
+        local useLegacy = shouldUseLegacyTooltip()
+        if useLegacy then
+            bgcol = COLOR_YELLOW
+            txcol = color_black
+            font  = "weight_improved_tooltip_legacy"
+            rad   = 8
+
+            text = ( "%s: %s | %s: %s" ):format( weightLabels.original, oriWeightStr, weightLabels.modified, modWeightStr )
+
+            surface.SetFont( font )
+            local tw, th = surface.GetTextSize( text )
+
+            draw.RoundedBox( rad, x - tw/2 - 12, y - th/2 - 4, tw + 24, th + 8, COLOR_TRANSPARENT )
+            draw.RoundedBox( rad, x - tw/2 - 10, y - th/2 - 2, tw + 20, th + 4, bgcol )
+            draw.SimpleText( text, font, x, y, txcol, 1, 1 )
+        else
+            bgcol = COLOR_TRANSPARENT
+            txcol = color_white
+            font  = "weight_improved_tooltip"
+            rad   = 0
+
+            local colormode  = getColorScale()
+            local colorscale = colorscales[ colormode ]
+            local color      = colorscale and colorscale.Min or color_white
+            if colorscale then
+                local frac = (modWeight or 0) / MAX_WEIGHT
+                color = LerpColor( frac, colorscale.Min, colorscale.Max )
+                halo.Add( {ent}, color )
+            end
+
+            local mult = math.Round( (modWeight or 1) / (oriWeight or 1), useRounding and decimals or 2 )
+
+            ComplexText( font,
+                { weightLabels.original..": ", oriWeightStr, "  |  "..weightLabels.modified..": ", modWeightStr, " ("..mult.."x)" },
+                { textcol, COLOR_BLUE, textcol, COLOR_BLUE, color }, pos.x, pos.y, 0, 0,
+                function( x, y, w, h )
+                    x = x - w/2
+                    draw.RoundedBox( rad, x-10, y-5, w+20, h+10, bgcol )
+                    draw.RoundedBox( rad, x-8,  y-3, w+16, h+6,  bgcol )
+                    return x, y
+                end
+            )
+        end
+    end
+    hook.Add( "HUDPaint", "weight_improved_hud", DrawHUD )
+
+    local function buildCPanel( cpanel )
+        local presets = {
+            Label      = "Presets",
+            MenuButton = 1,
+            Folder     = "weight",
+            Options = {
+                ["Default"] = {
+                    ["weight_improved_colorscale"]     = "1",
+                    ["weight_improved_decimals"]       = "2",
+                    ["weight_improved_mass"]           = "1",
+                    ["weight_improved_notifs"]         = "1",
+                    ["weight_improved_notifs_sound"]   = "1",
+                    ["weight_improved_rounded"]        = "1",
+                    ["weight_improved_tooltip_show"]   = "0",
+                    ["weight_improved_tooltip_legacy"] = "0",
+                    ["weight_improved_tooltip_scale"]  = "24",
+                },
+            },
+            CVars = {
+                "weight_improved_colorscale",
+                "weight_improved_decimals",
+                "weight_improved_mass",
+                "weight_improved_notifs",
+                "weight_improved_notifs_sound",
+                "weight_improved_rounded",
+                "weight_improved_tooltip_show",
+                "weight_improved_tooltip_legacy",
+                "weight_improved_tooltip_scale",
+            }
+        }
+
+        local colors = {
+            Label = "Color Scale: ",
+            MenuButton = 0,
+            Options = {
+                ["Green to Red"]    = { ["weight_improved_colorscale"] = 1 },
+                ["Green to Yellow"] = { ["weight_improved_colorscale"] = 2 },
+                ["Green to Blue"]   = { ["weight_improved_colorscale"] = 3 },
+                ["Blue to Red"]     = { ["weight_improved_colorscale"] = 4 },
+                ["None"]            = { ["weight_improved_colorscale"] = 0 }
+            }
+        }
+
+        cpanel:AddControl( "Label", { Text = "Modifies the weight of an entity" } )
+        cpanel:AddControl( "ComboBox", presets )
+        cpanel:ControlHelp( "" )
+        cpanel:AddControl( "Slider", { Label = "Weight: ", Command = "weight_improved_mass", Type = "Float", Min = "0.02", Max = MAX_WEIGHT } )
+        cpanel:ControlHelp( "" )
+        cpanel:AddControl( "ComboBox", colors )
+        cpanel:ControlHelp( "" )
+        cpanel:ControlHelp( "Adds a halo around the target entity with a color representing its current weight. The colors go from minimum to maximum respectively.\n" )
+        cpanel:AddControl( "Checkbox", { Label = "Display rounded weights in tooltip", Command = "weight_improved_rounded" } )
+        cpanel:AddControl( "Slider", { Label = "Decimal Places: ", Command = "weight_improved_decimals", Type = "Numeric", Min = "0", Max = "8" } )
+        cpanel:ControlHelp( "Determines how many decimal places the weights should be rounded to when displaying them in the HUD. Zero means whole numbers are displayed.\n" )
+        cpanel:AddControl( "Slider", { Label = "Tooltip Scale: ",     Command = "weight_improved_tooltip_scale", Type = "Numeric", Min = "1", Max = "128" } )
+        cpanel:ControlHelp( "Sets the size of the tooltip when drawing the HUD.\n" )
+        cpanel:AddControl( "Checkbox", { Label = "Always show tooltip",   Command = "weight_improved_tooltip_show" } )
+        cpanel:ControlHelp( "Shows the tooltip even when the weight tool is not being used." )
+        cpanel:AddControl( "Checkbox", { Label = "Use legacy tooltip", Command = "weight_improved_tooltip_legacy" } )
+        cpanel:ControlHelp( "Enables a slightly modified tooltip used in older versions of Garry's Mod." )
+        cpanel:AddControl( "Checkbox", { Label = "Display notifications",         Command = "weight_improved_notifs" } )
+        cpanel:ControlHelp( "Enables helpful notifications when applying, copying, or resetting an entity's weight." )
+        cpanel:AddControl( "Checkbox", { Label = "Play notification sounds",   Command = "weight_improved_notifs_sound" } )
+        cpanel:ControlHelp( "Enables the notification sound when applying weight to an entity.\n" )
+    end
+
+    TOOL.BuildCPanel = buildCPanel
 end
 
---[[--------------------------------------------------------------------------
--- Tool Functions
---------------------------------------------------------------------------]]--
+if SERVER then
+    util.AddNetworkString( "weight_improved_notif" )
+    util.AddNetworkString( "weight_improved_error" )
+    util.AddNetworkString( "weight_improved_requestweight" )
 
---[[--------------------------------------------------------------------------
---
--- 	TOOL:LeftClick( table )
---
---	Applies the client's weight setting onto the trace entity.
---]]--
+    function TOOL:SendNotif( str, notify, sound )
+        if ( not self:ShouldSendNotification() ) then return end
+
+        net.Start( "weight_improved_notif" )
+            net.WriteString( str )
+            net.WriteUInt( notify or NOTIFY_GENERIC, MIN_NOTIFY_BITS )
+            net.WriteString( sound or "" )
+        net.Send( self:GetOwner() )
+    end
+
+    function TOOL:SendError( str )
+        net.Start( "weight_improved_error" )
+            net.WriteString( str )
+            net.WriteUInt( notify or NOTIFY_ERROR, MIN_NOTIFY_BITS )
+        net.Send( self:GetOwner() )
+    end
+
+    net.Receive( "weight_improved_requestweight", function( _, ply )
+        local nextrequest = ply.weight_improved_nextrequest or 0
+        if nextrequest > CurTime() then return end
+        ply.weight_improved_nextrequest = CurTime() + 0.05
+
+        local ent = net.ReadEntity()
+        if not IsValid( ent ) then return end
+
+        improvedweight.SetNWVars( ent )
+    end )
+end
+
 function TOOL:LeftClick( tr )
-	local ent = tr.Entity
-	
-	if ( not IsValid( ent ) ) then return false end -- ignore invalid entities
-	if ( ent:IsPlayer() )     then return false end -- ignore players
-	if ( CLIENT )             then return true  end -- leave the rest up to the server
-	
-	-- check if the entity has a valid physics object before trying to get its mass
-	local phys = ent:GetPhysicsObject()
-	if ( not IsValid( phys ) ) then
-		self:SendError( L(prefix.."error_invalid_phys", localify.GetLocale( self:GetOwner() )) )
-		return false
-	end
-	
-	-- check if the client's weight setting is greater than 0 before trying to apply it
-	local mass = self:GetMass()
-	if ( mass < MIN_WEIGHT ) then
-		self:SendError( L(prefix.."error_zero_weight", localify.GetLocale( self:GetOwner() )) )
-		return false
-	end
-	
-	-- check if the client's weight setting is greater than the max
-	if ( mass > MAX_WEIGHT ) then
-		self:SendError( L(prefix.."error_max_weight", localify.GetLocale( self:GetOwner() )) .. (" (%s)"):format( string.Comma( MAX_WEIGHT) ) )
-		return false
-	end
-	
-	-- apply the modified weight and send a notification to the client
-	improvedweight.SetModifiedWeight( ent, mass )
-	self:SendNotif( (L(prefix.."notif_applied", localify.GetLocale( self:GetOwner() )) .. " (%s)"):format( string.Comma( math.Round( mass, 2 ) ) ), NOTIFY_GENERIC, "buttons/button14.wav" )
-	
-	return true
+    local ent = tr.Entity
+
+    if not IsValid( ent ) then return false end
+    if ent:IsPlayer() then return false end
+    if CLIENT then return true  end
+
+    local phys = ent:GetPhysicsObject()
+    if ( not IsValid( phys ) ) then
+        self:SendError( "This entity does not have a valid physics object (cannot modify weight)" )
+        return false
+    end
+
+    local mass = self:GetMass()
+    if ( mass < MIN_WEIGHT ) then
+        self:SendError( "You must apply a weight greater than 0" )
+        return false
+    end
+
+    if ( mass > MAX_WEIGHT ) then
+        self:SendError( "Weight cannot exceed max" )
+        return false
+    end
+
+    improvedweight.SetModifiedWeight( ent, mass )
+    self:SendNotif( ( "Applied weight (%s)" ):format( string.Comma( math.Round( mass, 2 ) ) ), NOTIFY_GENERIC, "buttons/button14.wav" )
+
+    return true
 end
 
---[[--------------------------------------------------------------------------
---
--- 	TOOL:RightClick( table )
---
---	Copies the weight of the trace entity.
---]]--
 function TOOL:RightClick( tr )
-	local ent = tr.Entity
-	
-	if ( not IsValid( ent ) ) then return false end -- ignore invalid entities
-	if ( ent:IsPlayer() )     then return false end -- ignore players
-	if ( CLIENT )             then return true  end -- leave the rest up to the server
-	
-	-- check if the entity has a valid physics object before trying to get its mass
-	local phys = ent:GetPhysicsObject()
-	if ( not IsValid( phys ) ) then
-		self:SendError( L(prefix.."error_invalid_phys", localify.GetLocale( self:GetOwner() )) )
-		return false
-	end
-	
-	-- copy the entity's weight and send a notification to the client
-	self:GetOwner():ConCommand( mode.."_mass " .. phys:GetMass() )
-	self:SendNotif( (L(prefix.."notif_copied", localify.GetLocale( self:GetOwner() )) .. " (%s)"):format( string.Comma( math.Round( phys:GetMass(), 2 ) ) ), NOTIFY_CLEANUP )
-	
-	return true
+    local ent = tr.Entity
+
+    if not IsValid( ent ) then return false end
+    if ent:IsPlayer() then return false end
+    if CLIENT then return true  end
+
+    local phys = ent:GetPhysicsObject()
+    if ( not IsValid( phys ) ) then
+        self:SendError( "This entity does not have a valid physics object (cannot modify weight)" )
+        return false
+    end
+
+    self:GetOwner():ConCommand( "weight_improved_mass " .. phys:GetMass() )
+    self:SendNotif( ("Copied weight (%s)"):format( string.Comma( math.Round( phys:GetMass(), 2 ) ) ), NOTIFY_CLEANUP )
+
+    return true
 end
 
---[[--------------------------------------------------------------------------
---
--- 	TOOL:Reload( table )
---
---	Restores the trace entity's original weight.
---]]--
 function TOOL:Reload( tr )
-	local ent = tr.Entity
-	
-	if ( not IsValid( ent ) ) then return false end -- ignore invalid entities
-	if ( ent:IsPlayer() )     then return false end -- ignore players
-	if ( CLIENT )             then return true  end -- leave the rest up to the server
-	
-	-- check if the entity has a valid physics object before trying to get its mass
-	local phys = ent:GetPhysicsObject()
-	if ( not IsValid( phys ) ) then 
-		self:SendError( L(prefix.."error_invalid_phys", localify.GetLocale( self:GetOwner() )) )
-		return false
-	end
-	
-	-- restore the entity's original weight and send a notification to the client
-	improvedweight.RestoreOriginalWeight( ent )
-	self:SendNotif( (L(prefix.."notif_restored", localify.GetLocale( self:GetOwner() )) .. " (%s)"):format( string.Comma( math.Round( improvedweight.GetOriginalWeight( ent ), 2 ) ) ), NOTIFY_UNDO )
-	
-	return true
+    local ent = tr.Entity
+
+    if not IsValid( ent ) then return false end
+    if ent:IsPlayer() then return false end
+    if CLIENT then return true end
+
+    local phys = ent:GetPhysicsObject()
+    if not IsValid( phys ) then
+        self:SendError( "This entity does not have a valid physics object (cannot modify weight)" )
+        return false
+    end
+
+    improvedweight.RestoreOriginalWeight( ent )
+    self:SendNotif( ("Restored original weight (%s)"):format( string.Comma( math.Round( improvedweight.GetOriginalWeight( ent ), 2 ) ) ), NOTIFY_UNDO )
+
+    return true
 end
 
---[[--------------------------------------------------------------------------
---
---	TOOL:Think()
---
---]]--
 function TOOL:Think()
-	if ( CLIENT ) then return end -- leave the rest up to the server
+    if CLIENT then return end
 
-	local ply = self:GetOwner()
-	local ent = ply:GetEyeTrace().Entity
-	
-	if ( not IsValid( ent ) ) then return false end -- ignore invalid entities
-	if ( ent:IsPlayer() )     then return false end -- ignore players
-	
-	local phys = ent:GetPhysicsObject()
-	if ( not IsValid( phys ) ) then return false end -- ignore entities without a physics object
-	
-	-- if for some reason the entity's original/modified weights weren't setup when it was spawned,
-	-- set it up and monitor its mass for any changes that occur outside of this tool.
-	
-	-- e.g., if an external script calls ent:GetPhysicsObject():SetMass(<number>) without using
-	-- the improvedweight module, this will ensure the change is properly handled within the tool.
-	if ( not improvedweight.IsSetup( ent ) ) then
-		improvedweight.Setup( ent )
-	else
-		if ( phys:GetMass() ~= improvedweight.GetModifiedWeight( ent ) ) then
-			improvedweight.SetModifiedWeight( ent, phys:GetMass() )
-		end
-	end
+    local ply = self:GetOwner()
+    local ent = ply:GetEyeTrace().Entity
+
+    if not IsValid( ent ) then return false end
+    if ent:IsPlayer() then return false end
+
+    local phys = ent:GetPhysicsObject()
+    if ( not IsValid( phys ) ) then return false end
+    if ( not improvedweight.IsSetup( ent ) ) then
+        improvedweight.Setup( ent )
+    else
+        if ( phys:GetMass() ~= improvedweight.GetModifiedWeight( ent ) ) then
+            improvedweight.SetModifiedWeight( ent, phys:GetMass() )
+        end
+    end
 end
